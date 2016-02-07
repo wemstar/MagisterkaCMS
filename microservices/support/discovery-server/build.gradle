@@ -16,7 +16,7 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot' 
 
 jar {
-	baseName = 'discover-server'
+	baseName = 'discovery-server'
 	version = '0.0.1-SNAPSHOT'
 }
 sourceCompatibility = 1.8
@@ -30,9 +30,11 @@ repositories {
 
 
 dependencies {
+	compile('net.logstash.logback:logstash-logback-encoder:4.6')
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
 	compile('org.springframework.cloud:spring-cloud-starter-config')
+
 	testCompile('org.springframework.boot:spring-boot-starter-test') 
 }
 
@@ -42,7 +44,7 @@ dependencyManagement {
 	}
 }
 
-
+apply from: '../../../docker.gradle'
 eclipse {
 	classpath {
 		 containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')

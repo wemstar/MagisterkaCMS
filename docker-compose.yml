@@ -1,0 +1,29 @@
+# config-server:
+#   image: magisterka-cms/image-config-server
+#   ports:
+#     - "8888:8080"
+# discovery-server:
+#   image: magisterka-cms/image-discovery-server
+#   ports:
+#     - "8770:8080"
+#   links:
+#     - config-server
+elasticsearch:
+  image: elasticsearch
+  command: elasticsearch -Des.network.host=0.0.0.0
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+logstash:
+  image: logstash
+  command: logstash -e 'input { tcp { port => 5044 codec => json_lines }} output { elasticsearch { hosts => ["elasticsearch:9200"] }}'
+  ports:
+    - "5044:5044"
+  links:
+    - elasticsearch
+kibana:
+  image: kibana
+  ports:
+    - "5601:5601"
+  links:
+    - elasticsearch
