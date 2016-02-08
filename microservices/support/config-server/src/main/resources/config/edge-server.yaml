@@ -1,4 +1,5 @@
-server.port = 8769
-zuul.routes.discovery-server = /discovery-server/*
+server:
+  port: 8769
+
 
 
