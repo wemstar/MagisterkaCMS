@@ -2,3 +2,5 @@ include 'microservices/core/simple-micro-service'
 include 'microservices/support/config-server'
 include 'microservices/support/edge-server'
 include 'microservices/support/discovery-server'
+include 'microservices/core/user-micro-service'
+include "commons/client-feign"
