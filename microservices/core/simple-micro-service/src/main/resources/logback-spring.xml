@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+    <springProfile name="default">
+        <property scope="context" name="logstash-adres" value="192.168.99.101" />
+    </springProfile>
+
+    <springProfile name="docker">
+        <property scope="context" name="logstash-adres" value="logstash" />
+    </springProfile>
+
+    <springProperty scope="context" name="appname" source="spring.application.name"/>
     <!-- Methode 2 -->
     <appender name="JSON" class="ch.qos.logback.core.FileAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
@@ -12,18 +22,20 @@
         <file>${LOG_FILE}.json</file>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">
             <includeCallerInfo>true</includeCallerInfo>
-            <customFields>{"appname":"edge-server"}</customFields>
+            <customFields>{"appname":"${appname}"}</customFields>
         </encoder>
-    </appender>
+    </appender>O
     <!-- Methode 3 -->
+
     <appender name="TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>192.168.99.101:5044</destination>
+        <destination>${logstash-adres}:5044</destination>
         <!-- encoder is required -->
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">
             <includeCallerInfo>true</includeCallerInfo>
-            <customFields>{"appname":"edge-server"}</customFields>
+            <customFields>{"appname":"config-server"}</customFields>
         </encoder>
     </appender>
+
     <root level="INFO">
         <appender-ref ref="CONSOLE" />
         <!-- Methode 1-->
