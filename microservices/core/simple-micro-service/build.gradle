@@ -1,7 +1,7 @@
 apply from: '../../../spring-boot.gradle'
 
 jar {
-	version = '0.0.1-SNAPSHOT'
+	baseName = 'simple-micro-service'
 }
 
 dependencies {

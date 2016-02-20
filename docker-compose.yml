@@ -17,16 +17,41 @@ kibana:
     - "5601:5601"
   links:
     - elasticsearch
-config-server:
-  image: magisterka-cms/image-config-server
-  expose:
-   - "8080"
-  links:
-    - logstash
+#config-server:
+#  image: magisterka-cms/image-config-server
+#  expose:
+#   - "8080"
+#  links:
+#    - logstash
 discovery-server:
   image: magisterka-cms/image-discovery-server
   ports:
     - "8770:8080"
+  expose:
+    - "8080"
   links:
     - logstash
-    - config-server
+  external_links:
+    - config-container:config-server
+edge-server:
+  image: magisterka-cms/image-edge-server
+  ports:
+    - "8769:8080"
+  links:
+    - logstash
+    - discovery-server
+  external_links:
+    - config-container:config-server
+simple-micro-service:
+  image: magisterka-cms/image-simple-micro-service
+  ports:
+    - "9999:8080"
+  expose:
+      - "8080"
+  links:
+    - logstash
+    - discovery-server
+    - edge-server
+  external_links:
+    - config-container:config-server
+
