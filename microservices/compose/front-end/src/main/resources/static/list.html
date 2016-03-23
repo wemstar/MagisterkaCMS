@@ -1,0 +1,9 @@
+<div data-ng-controller="exampleController">
+    <div data-ng-repeat="item in list">
+        <h4>User:</h4>
+        <p>Fist name: {{item.firstName}}</p>
+        <p>Last name: {{item.lastName}}</p>
+        <p>Change last name: <input type="text" data-ng-model="item.lastName"></p>
+    </div>
+    <a href="/#/">Go back</a>
+</div>

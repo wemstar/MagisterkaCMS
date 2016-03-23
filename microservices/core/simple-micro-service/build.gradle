@@ -3,7 +3,7 @@ apply from: '../../../spring-boot.gradle'
 jar {
 	baseName = 'simple-micro-service'
 }
-
+apply from: '../../../commons.gradle'
 dependencies {
 	compile('org.springframework.cloud:spring-cloud-starter-hystrix')
 }
