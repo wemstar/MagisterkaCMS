@@ -2,4 +2,5 @@
 dependencies {
     compile project(":commons/client-feign")
     compile project(":commons/dto-common")
+    compile project(":commons/utils-common")
 }
