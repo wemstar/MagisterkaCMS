@@ -9,6 +9,7 @@ buildscript {
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 		classpath("com.bmuschko:gradle-docker-plugin:2.6.5")
+		classpath 'com.android.tools.build:gradle:1.5.0'
 	}
 }
 
