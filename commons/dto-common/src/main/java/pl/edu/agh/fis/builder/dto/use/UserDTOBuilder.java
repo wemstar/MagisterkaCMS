@@ -10,7 +10,6 @@ public class UserDTOBuilder {
     private String email;
     private String login;
     private String password;
-    private String adres;
 
     private UserDTOBuilder() {
     }
@@ -39,13 +38,8 @@ public class UserDTOBuilder {
         return this;
     }
 
-    public UserDTOBuilder adres(String adres) {
-        this.adres = adres;
-        return this;
-    }
-
     public UserDTOBuilder but() {
-        return anUserDTO().id(id).email(email).login(login).password(password).adres(adres);
+        return anUserDTO().id(id).email(email).login(login).password(password);
     }
 
     public UserDTO build() {
@@ -54,7 +48,6 @@ public class UserDTOBuilder {
         userDTO.setEmail(email);
         userDTO.setLogin(login);
         userDTO.setPassword(password);
-        userDTO.setAdres(adres);
         return userDTO;
     }
 }

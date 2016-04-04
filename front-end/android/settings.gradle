@@ -1,0 +1,3 @@
+include ':app'
+include 'dto-common'
+project(':dto-common').projectDir = new File('../../commons/dto-common')

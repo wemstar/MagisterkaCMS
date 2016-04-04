@@ -9,8 +9,6 @@ public class UserDTO {
     private String email;
     private String login;
     private String password;
-    private String adres;
-    private String name;
 
     public Long getId() {
         return id;
@@ -42,21 +40,5 @@ public class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getAdres() {
-        return adres;
-    }
-
-    public void setAdres(String adres) {
-        this.adres = adres;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

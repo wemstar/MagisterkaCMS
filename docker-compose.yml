@@ -9,6 +9,8 @@ logstash:
   command: logstash -e 'input { tcp { port => 5044 codec => json_lines }} output { elasticsearch { hosts => ["elasticsearch:9200"] }}'
   ports:
     - "5044:5044"
+  expose:
+    - "5044"
   links:
     - elasticsearch
 kibana:
@@ -17,25 +19,25 @@ kibana:
     - "5601:5601"
   links:
     - elasticsearch
-#discovery-server:
-#  image: magisterka-cms/image-discovery-server
-#  ports:
-#    - "8770:8080"
-#  expose:
-#    - "8080"
-#  links:
-#    - logstash
-#  external_links:
-#    - config-container:config-server
-#edge-server:
-#  image: magisterka-cms/image-edge-server
-#  ports:
-#    - "8769:8080"
-#  links:
-#    - logstash
-#    - discovery-server
-#  external_links:
-#    - config-container:config-server
+discovery-server:
+  image: magisterka-cms/image-discovery-server
+  ports:
+    - "8770:8080"
+  expose:
+    - "8080"
+  links:
+    - logstash
+  external_links:
+    - config-container:config-server
+edge-server:
+  image: magisterka-cms/image-edge-server
+  ports:
+    - "8769:8080"
+  links:
+    - logstash
+    - discovery-server
+  external_links:
+    - config-container:config-server
 #simple-micro-service:
 #  image: magisterka-cms/image-simple-micro-service
 #  expose:
@@ -46,14 +48,14 @@ kibana:
 #    - edge-server
 #  external_links:
 #    - config-container:config-server
-#user-micro-service:
-#  image: magisterka-cms/image-user-micro-service
-#  expose:
-#      - "8080"
-#  links:
-#    - logstash
-#    - discovery-server
-#    - edge-server
-#  external_links:
-#    - config-container:config-server
+user-micro-service:
+  image: magisterka-cms/image-user-micro-service
+  expose:
+      - "8080"
+  links:
+    - logstash
+    - discovery-server
+    - edge-server
+  external_links:
+    - config-container:config-server
 

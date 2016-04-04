@@ -46,7 +46,6 @@ public class TestControllerMVC {
     public Resource<UserDTO> createUser() {
         UserDTO user = UserDTOBuilder.anUserDTO()
                 .id(1L)
-                .adres("Hura")
                 .email("email")
                 .login("login1")
                 .password("pass2")

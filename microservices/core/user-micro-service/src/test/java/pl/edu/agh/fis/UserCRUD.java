@@ -52,10 +52,10 @@ public class UserCRUD {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[0].email",containsString("1234")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[0].login",containsString("log2")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[0].password",containsString("password")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[0].password",containsString("e7892bf61dd386c6f2f5a70926cc5eb787a3a55495d2d879b612eedd597bfc61")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[1].email",containsString("12345")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[1].login",containsString("log3")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[1].password",containsString("password")));
+                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[1].password",containsString("704aa0c6ae6dde6be68b69c63278557aca8260798f5e711df38a5c12aa6b0742")));
         mockMvc.perform(put("/user/1")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content("{\"email\":\"1235\",\"login\":\"log2\",\"password\":\"password\"}")
@@ -64,10 +64,10 @@ public class UserCRUD {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[0].email",containsString("1235")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[0].login",containsString("log2")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[0].password",containsString("password")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[0].password",containsString("e7892bf61dd386c6f2f5a70926cc5eb787a3a55495d2d879b612eedd597bfc61")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[1].email",containsString("12345")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[1].login",containsString("log3")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[1].password",containsString("password")));
+                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[1].password",containsString("704aa0c6ae6dde6be68b69c63278557aca8260798f5e711df38a5c12aa6b0742")));
 
 
         mockMvc.perform(delete("/user/1")).andExpect(MockMvcResultMatchers.status().isNoContent());

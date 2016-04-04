@@ -1,6 +1,5 @@
 package pl.edu.agh.fis.clients.user;
 
-import feign.Headers;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.hateoas.Resource;
 import org.springframework.http.MediaType;

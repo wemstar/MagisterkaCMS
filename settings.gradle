@@ -1,8 +1,6 @@
-include 'android'
 include "commons/client-feign"
 include "commons/dto-common"
 include "commons/utils-common"
-include "microservices/compose/user-compose-micro-service"
 include "microservices/compose/front-end"
 include 'microservices/core/simple-micro-service'
 include 'microservices/core/user-micro-service'

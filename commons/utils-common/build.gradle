@@ -1,0 +1,24 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+jar {
+	baseName = 'dto-common'
+	version = '0.0.2-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile('net.logstash.logback:logstash-logback-encoder:4.6')
+	compile('ch.qos.logback:logback-classic:1.1.6')
+
+}
+
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.9'
+}
