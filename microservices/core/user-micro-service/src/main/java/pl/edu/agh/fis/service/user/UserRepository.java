@@ -13,5 +13,5 @@ import pl.edu.agh.fis.entity.user.UserEntity;
 @RepositoryRestResource(collectionResourceRel = "user", path = "user")
 public interface UserRepository extends CrudRepository<UserEntity,Long> {
 
-    Resource<UserEntity> findByLogin(@Param("login") String login);
+    UserEntity findByLogin(@Param("login") String login);
 }

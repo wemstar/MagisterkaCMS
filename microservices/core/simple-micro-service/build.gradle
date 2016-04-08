@@ -6,6 +6,7 @@ jar {
 apply from: '../../../commons.gradle'
 dependencies {
 	compile('org.springframework.cloud:spring-cloud-starter-hystrix')
+	compile project(':')
 }
 apply from: '../../../docker.gradle'
 

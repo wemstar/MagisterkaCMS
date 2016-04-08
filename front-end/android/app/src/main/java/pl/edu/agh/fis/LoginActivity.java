@@ -12,12 +12,14 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
-import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.EditorAction;
-import org.androidannotations.annotations.ViewById;
-import pl.edu.agh.fis.activity.user.CreateUserActivity;
+import org.androidannotations.annotations.*;
+import org.androidannotations.rest.spring.annotations.RestService;
+import org.springframework.http.ResponseEntity;
+
+import pl.edu.agh.fis.activity.document.DocumentListActivity_;
 import pl.edu.agh.fis.activity.user.CreateUserActivity_;
+import pl.edu.agh.fis.rest.login.LoginClient;
+import pl.edu.agh.fis.utils.TokenKeeper;
 
 /**
  * A login screen that offers login via email/password.
@@ -34,6 +36,11 @@ public class LoginActivity extends AppCompatActivity {
     View mProgressView;
     @ViewById(R.id.login_form)
     View mLoginFormView;
+
+    @RestService
+    LoginClient loginClient;
+    @Bean
+    TokenKeeper tokenKeeper;
 
     @Click(R.id.email_sign_in_button)
     void onEmailSingInButtonClicked() {
@@ -53,13 +60,6 @@ public class LoginActivity extends AppCompatActivity {
         }
         return false;
     }
-
-    private void showRegisterActivity() {
-        Intent intent = new Intent(this, CreateUserActivity_.class);
-        startActivity(intent);
-    }
-
-
 
 
     /**
@@ -92,37 +92,44 @@ public class LoginActivity extends AppCompatActivity {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
-            cancel = true;
         }
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
+
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
+            performLogin();
         }
     }
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
+
+    @Background
+    void performLogin() {
+        loginClient.setHttpBasicAuth(mEmailView.getText().toString(), mPasswordView.getText().toString());
+        ResponseEntity<Void> response = loginClient.login();
+        String token = response.getHeaders().get("x-auth-token").get(0);
+        tokenKeeper.setToken(token);
+        showProgress(false);
+        goToNewPage();
     }
 
+
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
         return password.length() > 4;
     }
+
+    //region GUI
 
     /**
      * Shows the progress UI and hides the login form.
      */
+    @UiThread
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
+    void showProgress(final boolean show) {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
@@ -153,5 +160,18 @@ public class LoginActivity extends AppCompatActivity {
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
+
+
+    private void showRegisterActivity() {
+        Intent intent = new Intent(this, CreateUserActivity_.class);
+        startActivity(intent);
+    }
+
+    @UiThread
+    void goToNewPage() {
+        Intent intent = new Intent(this, DocumentListActivity_.class);
+        startActivity(intent);
+    }
+    //endregion
 }
 

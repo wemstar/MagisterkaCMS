@@ -15,7 +15,7 @@ public interface UserCore {
     Resource<UserDTO> getUsers();
 
     @RequestMapping(method = RequestMethod.GET, path = "/user/search/findByLogin",params = "login")
-    Resource<UserDTO> getUserByLogin(@RequestParam("login") String login);
+    UserDTO getUserByLogin(@RequestParam("login") String login);
 
     @RequestMapping(method = RequestMethod.GET, path = "/user/{id}")
     Resource<UserDTO> getUser(@PathVariable("id") Long id);

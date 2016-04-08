@@ -73,6 +73,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:support-v4:23.1.1'
     compile 'com.android.support:design:23.1.1'
+    compile 'commons-codec:commons-codec:1.6'
     compile project(":dto-common")
 }
 

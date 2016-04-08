@@ -21,9 +21,6 @@ public class UserEntity {
     private String login;
     @Column(name = "USER_PASSWORD")
     private String password;
-    @Column(name = "USER_ADRES")
-    private String adres;
-
 
     public Long getId() {
         return id;
@@ -57,12 +54,5 @@ public class UserEntity {
         this.password = password;
     }
 
-    public String getAdres() {
-        return adres;
-    }
-
-    public void setAddres(String addres) {
-        this.adres = addres;
-    }
 
 }

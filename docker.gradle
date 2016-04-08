@@ -19,7 +19,7 @@ repositories {
 def dockerPort = 8080
 apply plugin: com.bmuschko.gradle.docker.DockerRemoteApiPlugin
 docker {
-    url = 'https://192.168.99.101:2376'
+    url = 'https://192.168.0.23:2376'
     certPath = new File(System.properties['user.home'], '.docker/machine/machines/magisterka-cms')
 }
 
@@ -40,4 +40,4 @@ task buildDockerImage(type: DockerBuildImage,dependsOn:assemble) {
     tag = "magisterka-cms/image-${jar.baseName}"
 }
 
-//assemble.finalizedBy(buildDockerImage)
+assemble.finalizedBy(buildDockerImage)

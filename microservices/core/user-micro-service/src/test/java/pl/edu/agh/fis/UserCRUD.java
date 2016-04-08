@@ -40,7 +40,7 @@ public class UserCRUD {
 
         mockMvc.perform(post("/user")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content("{\"email\":\"1234\",\"login\":\"log2\",\"password\":\"password\"}")
+                .content("{\"email\":\"1234\",\"login\":\"user\",\"password\":\"password\"}")
         ).andExpect(MockMvcResultMatchers.status().isCreated());
 
         mockMvc.perform(post("/user")
@@ -51,8 +51,8 @@ public class UserCRUD {
         mockMvc.perform(get("/user"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[0].email",containsString("1234")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[0].login",containsString("log2")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[0].password",containsString("e7892bf61dd386c6f2f5a70926cc5eb787a3a55495d2d879b612eedd597bfc61")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[0].login",containsString("user")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[0].password",containsString("0ad7e108dbc1a0d6e8bb062c31950e90fb392b4a0e058cb5aaba1259b7e3d4cd")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[1].email",containsString("12345")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[1].login",containsString("log3")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.user[1].password",containsString("704aa0c6ae6dde6be68b69c63278557aca8260798f5e711df38a5c12aa6b0742")));

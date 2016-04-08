@@ -5,5 +5,6 @@ package pl.edu.agh.fis;
  */
 public class Constraints {
 
-    public static final String SERVER_ADRES="http://192.168.0.19:8769";
+    public static final String SERVER_ADRES="http://192.168.0.23:8769";
+    //public static final String SERVER_ADRES="http://192.168.0.11:8769";
 }
