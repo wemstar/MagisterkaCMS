@@ -2,6 +2,7 @@ include "commons/client-feign"
 include "commons/dto-common"
 include "commons/utils-common"
 include "microservices/compose/front-end"
+include "microservices/compose/template-microservice"
 include 'microservices/core/simple-micro-service'
 include 'microservices/core/user-micro-service'
 include 'microservices/support/config-server'

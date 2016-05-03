@@ -6,7 +6,7 @@ import org.androidannotations.rest.spring.annotations.Put;
 import org.androidannotations.rest.spring.annotations.Rest;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import pl.edu.agh.fis.Constraints;
-import pl.edu.agh.fis.dto.use.UserDTO;
+import pl.edu.agh.fis.dto.user.UserDTO;
 
 /**
  * Created by wemstar on 2016-04-02.

@@ -19,6 +19,8 @@ kibana:
     - "5601:5601"
   links:
     - elasticsearch
+#mongodb:
+#  image: mongo
 discovery-server:
   image: magisterka-cms/image-discovery-server
   ports:

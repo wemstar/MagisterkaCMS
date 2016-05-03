@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import pl.edu.agh.fis.dto.use.UserDTO;
-import pl.edu.agh.fis.dto.use.UserGroupDTO;
+import pl.edu.agh.fis.dto.user.UserDTO;
+import pl.edu.agh.fis.dto.user.UserGroupDTO;
 
 /**
  * Created by wemstar on 2016-02-28.

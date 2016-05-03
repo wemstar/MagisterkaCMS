@@ -1,7 +1,6 @@
 package pl.edu.agh.fis.auth.provider;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Resource;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,7 +10,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.fis.clients.user.UserCore;
-import pl.edu.agh.fis.dto.use.UserDTO;
+import pl.edu.agh.fis.dto.user.UserDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +32,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String name = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        // use the credentials to try to authenticate against the third party system
+        // user the credentials to try to authenticate against the third party system
         if (authenticatedAgainstThirdPartySystem(name,password)) {
             List<GrantedAuthority> grantedAuths = new ArrayList<>();
             return new UsernamePasswordAuthenticationToken(name, password, grantedAuths);

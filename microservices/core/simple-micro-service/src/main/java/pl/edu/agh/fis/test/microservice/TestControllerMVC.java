@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import pl.edu.agh.fis.builder.dto.use.UserDTOBuilder;
+import pl.edu.agh.fis.builder.dto.user.UserDTOBuilder;
 import pl.edu.agh.fis.clients.user.UserCore;
-import pl.edu.agh.fis.dto.use.UserDTO;
+import pl.edu.agh.fis.dto.user.UserDTO;
 
 /**
  * Created by wemstar on 2016-02-08.

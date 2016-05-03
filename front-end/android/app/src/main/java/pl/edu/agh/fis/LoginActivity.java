@@ -12,11 +12,19 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
-import org.androidannotations.annotations.*;
+
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.EditorAction;
+import org.androidannotations.annotations.OptionsMenu;
+import org.androidannotations.annotations.UiThread;
+import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
 import org.springframework.http.ResponseEntity;
 
-import pl.edu.agh.fis.activity.document.DocumentListActivity_;
+import pl.edu.agh.fis.activity.main.MainActivity;
 import pl.edu.agh.fis.activity.user.CreateUserActivity_;
 import pl.edu.agh.fis.rest.login.LoginClient;
 import pl.edu.agh.fis.utils.TokenKeeper;
@@ -25,6 +33,7 @@ import pl.edu.agh.fis.utils.TokenKeeper;
  * A login screen that offers login via email/password.
  */
 @EActivity(R.layout.activity_login)
+@OptionsMenu(R.menu.global)
 public class LoginActivity extends AppCompatActivity {
 
     // UI references.
@@ -44,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Click(R.id.email_sign_in_button)
     void onEmailSingInButtonClicked() {
-        attemptLogin();
+        goToNewPage();//attemptLogin();
     }
 
     @Click(R.id.register_button)
@@ -131,7 +140,7 @@ public class LoginActivity extends AppCompatActivity {
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     void showProgress(final boolean show) {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
+        // for very easy animations. If available, user these APIs to fade-in
         // the progress spinner.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
@@ -169,7 +178,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @UiThread
     void goToNewPage() {
-        Intent intent = new Intent(this, DocumentListActivity_.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
     //endregion

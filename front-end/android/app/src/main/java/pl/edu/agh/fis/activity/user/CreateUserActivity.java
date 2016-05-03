@@ -8,7 +8,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
 import pl.edu.agh.fis.R;
-import pl.edu.agh.fis.builder.dto.use.UserDTOBuilder;
+import pl.edu.agh.fis.builder.dto.user.UserDTOBuilder;
 import pl.edu.agh.fis.rest.user.UserClient;
 
 /**

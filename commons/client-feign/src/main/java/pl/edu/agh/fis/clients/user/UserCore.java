@@ -4,7 +4,7 @@ import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.hateoas.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import pl.edu.agh.fis.dto.use.UserDTO;
+import pl.edu.agh.fis.dto.user.UserDTO;
 
 /**
  * Created by wemstar on 2016-02-27.
