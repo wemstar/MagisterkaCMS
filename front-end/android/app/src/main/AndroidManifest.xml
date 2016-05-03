@@ -27,7 +27,7 @@
             android:name=".activity.user.CreateUserActivity_"
             android:label="Android" />
         <activity
-            android:name=".activity.main.MainActivity"
+            android:name=".activity.user.MainActivity"
             android:label="@string/title_activity_main"></activity>
     </application>
 

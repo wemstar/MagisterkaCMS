@@ -1,8 +1,8 @@
-package pl.edu.agh.fis.activity.main;
+package pl.edu.agh.fis.activity.user;
 
 
 import android.app.Activity;
-import android.app.ActionBar;
+import android.support.v7.app.ActionBar;
 import android.app.Fragment;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -269,7 +270,7 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private ActionBar getActionBar() {
-        return getActivity().getActionBar();
+        return ((AppCompatActivity) getActivity()).getSupportActionBar();
     }
 
     /**
