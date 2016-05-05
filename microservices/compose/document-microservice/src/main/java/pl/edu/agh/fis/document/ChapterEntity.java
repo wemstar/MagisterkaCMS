@@ -1,5 +1,7 @@
 package pl.edu.agh.fis.document;
 
+import com.itextpdf.text.Paragraph;
+
 import java.util.List;
 
 /**

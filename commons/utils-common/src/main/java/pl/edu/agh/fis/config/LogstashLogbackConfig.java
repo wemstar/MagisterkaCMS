@@ -26,8 +26,8 @@ public class LogstashLogbackConfig {
         logstashTcpSocketAppender.start();
 
         rootLogger.addAppender(logstashTcpSocketAppender);
-        rootLogger.setLevel(Level.DEBUG);
-        rootLogger.warn(logstashAdres);
+        /*rootLogger.setLevel(Level.DEBUG);
+        rootLogger.warn(logstashAdres);*/
         return logstashTcpSocketAppender;
     }
 }

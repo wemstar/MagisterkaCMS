@@ -1,7 +1,7 @@
 apply from: '../../../spring-boot.gradle'
 
 jar {
-	baseName = 'documentmicroservice'
+	baseName = 'document-microservice'
 }
 
 
