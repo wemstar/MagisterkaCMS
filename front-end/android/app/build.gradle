@@ -66,15 +66,18 @@ dependencies {
     compile "org.androidannotations:rest-spring-api:$AAVersion"
 
     //compile 'com.google.android.gms:play-services:4.2.42'
+    compile project(":dto-common")
     compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.6.4'
     compile 'com.fasterxml.jackson.core:jackson-core:2.6.4'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.6.4'
-    compile 'com.android.support:appcompat-v7:23.2.1'
-    compile 'com.android.support:support-v4:23.2.1'
-    compile 'com.android.support:design:23.2.1'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.android.support:design:23.3.0'
     compile 'commons-codec:commons-codec:1.6'
-    compile project(":dto-common")
+    compile 'com.android.support:recyclerview-v7:23.3.0'
+
+
 }
 
 apt {

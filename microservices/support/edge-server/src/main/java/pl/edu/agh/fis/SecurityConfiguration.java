@@ -2,33 +2,31 @@ package pl.edu.agh.fis;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
-import redis.clients.jedis.Protocol;
-import redis.embedded.RedisServer;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
+import org.springframework.transaction.PlatformTransactionManager;
 
-import javax.annotation.PreDestroy;
-import java.io.IOException;
+import javax.sql.DataSource;
 
 /**
  * Created by wemstar on 2016-04-06.
  */
 @Configuration
-@EnableRedisHttpSession
+@EnableJdbcHttpSession
 public class SecurityConfiguration {
 
-    private static RedisServer redisServer;
+    @Bean
+    public EmbeddedDatabase dataSource() {
+        return new EmbeddedDatabaseBuilder()
+                .setType(EmbeddedDatabaseType.H2)
+                .addScript("org/springframework/session/jdbc/schema-h2.sql").build();
+    }
 
     @Bean
-    public JedisConnectionFactory connectionFactory() throws IOException {
-        redisServer = new RedisServer(Protocol.DEFAULT_PORT);
-        redisServer.start();
-        return new JedisConnectionFactory();
+    public PlatformTransactionManager transactionManager(DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
     }
-
-    @PreDestroy
-    public void destroy() {
-        redisServer.stop();
-    }
-
 }

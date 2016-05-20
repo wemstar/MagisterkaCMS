@@ -4,20 +4,37 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pl.edu.agh.fis.activity.user.MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.main.MainActivity">
 
     <!-- As the main content view, the view below consumes the entire
          space available using match_parent in both dimensions. -->
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+        <fragment android:name="pl.edu.agh.fis.fragment.document.DocumentFragment_"
+            android:id="@+id/headlines_fragment"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floatingButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_add"
+            app:layout_anchor="@id/headlines_fragment"
+            app:layout_anchorGravity="bottom|right|end" />
+    </FrameLayout>
+
 
     <!-- The drawer is given a fixed width in dp and extends the full height of
          the container. -->
     <fragment
         android:id="@+id/navigation_drawer"
-        android:name="pl.edu.agh.fis.activity.user.NavigationDrawerFragment"
+        android:name="pl.edu.agh.fis.activity.main.NavigationDrawerFragment"
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"

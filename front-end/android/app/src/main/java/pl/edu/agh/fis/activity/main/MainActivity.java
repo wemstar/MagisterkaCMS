@@ -1,9 +1,11 @@
-package pl.edu.agh.fis.activity.user;
+package pl.edu.agh.fis.activity.main;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -11,10 +13,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import pl.edu.agh.fis.R;
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
 
+import pl.edu.agh.fis.R;
+import pl.edu.agh.fis.activity.document.create.CreateDocumentActivity_;
+import pl.edu.agh.fis.fragment.document.DocumentFragment;
+
+@EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity
-implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+implements NavigationDrawerFragment.NavigationDrawerCallbacks, DocumentFragment.OnFragmentInteractionListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -26,11 +35,8 @@ implements NavigationDrawerFragment.NavigationDrawerCallbacks {
      */
     private CharSequence mTitle;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+    @AfterViews
+    void initalize() {
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -40,6 +46,7 @@ implements NavigationDrawerFragment.NavigationDrawerCallbacks {
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
     }
+
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
@@ -69,6 +76,17 @@ implements NavigationDrawerFragment.NavigationDrawerCallbacks {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Click(R.id.floatingButton)
+    void updateBookmarksClicked() {
+        Intent intent = new Intent(this,CreateDocumentActivity_.class);
+        startActivity(intent);
     }
 
     /**

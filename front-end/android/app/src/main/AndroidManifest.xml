@@ -27,8 +27,14 @@
             android:name=".activity.user.CreateUserActivity_"
             android:label="Android" />
         <activity
-            android:name=".activity.user.MainActivity"
-            android:label="@string/title_activity_main"></activity>
+            android:name=".activity.main.MainActivity_"
+            android:label="@string/title_activity_main" />
+        <activity
+            android:name=".activity.document.create.CreateDocumentActivity_"
+            android:label="@string/title_activity_create_document"></activity>
+        <activity
+            android:name=".activity.document.chapter.list.ChapterListActivity_"
+            android:label="@string/title_activity_create_document"></activity>
     </application>
 
 </manifest>

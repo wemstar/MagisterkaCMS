@@ -24,8 +24,9 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
 import org.springframework.http.ResponseEntity;
 
+import pl.edu.agh.fis.activity.main.MainActivity_;
 import pl.edu.agh.fis.activity.user.CreateUserActivity_;
-import pl.edu.agh.fis.activity.user.MainActivity;
+import pl.edu.agh.fis.activity.main.MainActivity;
 import pl.edu.agh.fis.rest.login.LoginClient;
 import pl.edu.agh.fis.utils.TokenKeeper;
 
@@ -53,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Click(R.id.email_sign_in_button)
     void onEmailSingInButtonClicked() {
-        goToNewPage();//attemptLogin();
+        attemptLogin();
     }
 
     @Click(R.id.register_button)
@@ -178,7 +179,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @UiThread
     void goToNewPage() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MainActivity_.class);
         startActivity(intent);
     }
     //endregion

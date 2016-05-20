@@ -1,4 +1,4 @@
-package pl.edu.agh.fis.activity.user;
+package pl.edu.agh.fis.activity.main;
 
 
 import android.app.Activity;
