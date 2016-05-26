@@ -7,6 +7,7 @@ import android.widget.RelativeLayout;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.FocusChange;
+import org.androidannotations.annotations.ViewById;
 
 import pl.edu.agh.fis.R;
 import pl.edu.agh.fis.dto.document.ChapterDTO;
@@ -23,8 +24,12 @@ public class ChapterItemView extends RelativeLayout {
         super(context);
     }
 
+    @ViewById(R.id.chapter_title)
+    EditText chapterTitile;
+
     public void bindChapter(ChapterDTO chapterDTO) {
         this.chapterDTO = chapterDTO;
+        chapterTitile.setText(chapterDTO.name);
     }
 
     @FocusChange(R.id.chapter_title)

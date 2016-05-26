@@ -35,6 +35,9 @@
         <activity
             android:name=".activity.document.chapter.list.ChapterListActivity_"
             android:label="@string/title_activity_create_document"></activity>
+        <activity
+            android:name=".activity.document.paragraph.list.ParagraphListActivity_"
+            android:label="@string/title_activity_create_document"></activity>
     </application>
 
 </manifest>
