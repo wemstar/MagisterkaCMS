@@ -2,7 +2,6 @@ package pl.edu.agh.fis.view.document.chapter;
 
 import android.content.Context;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import org.androidannotations.annotations.EViewGroup;
@@ -15,12 +14,12 @@ import pl.edu.agh.fis.dto.document.ChapterDTO;
 /**
  * Created by wemstar on 2016-05-14.
  */
-@EViewGroup(R.layout.chapter_layout)
-public class ChapterItemView extends RelativeLayout {
+@EViewGroup(R.layout.edit_text_layout)
+public class ChapterItemEditView extends RelativeLayout {
 
     private ChapterDTO chapterDTO;
 
-    public ChapterItemView(Context context) {
+    public ChapterItemEditView(Context context) {
         super(context);
     }
 

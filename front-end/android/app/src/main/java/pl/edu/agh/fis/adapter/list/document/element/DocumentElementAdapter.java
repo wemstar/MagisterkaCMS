@@ -3,19 +3,20 @@ package pl.edu.agh.fis.adapter.list.document.element;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 
+import java.util.List;
+
 import pl.edu.agh.fis.dto.document.ChapterDTO;
 import pl.edu.agh.fis.dto.document.DocumentDTO;
 import pl.edu.agh.fis.dto.document.ParagraphDTO;
-import pl.edu.agh.fis.view.document.chapter.ChapterItemView;
-import pl.edu.agh.fis.view.document.chapter.ChapterItemView_;
-import pl.edu.agh.fis.view.document.paragraph.ParagraphItemView;
-import pl.edu.agh.fis.view.document.paragraph.ParagraphItemView_;
+import pl.edu.agh.fis.view.document.chapter.ChapterItemEditView;
+import pl.edu.agh.fis.view.document.chapter.ChapterItemEditView_;
+import pl.edu.agh.fis.view.document.paragraph.ParagraphItemEditView;
+import pl.edu.agh.fis.view.document.paragraph.ParagraphItemEditView_;
 
 /**
  * Created by wemstar on 2016-05-08.
@@ -43,7 +44,8 @@ public class DocumentElementAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return document.chapters.get(groupPosition).paragraphs.size();
+        List<ParagraphDTO> paragraphs = document.chapters.get(groupPosition).paragraphs;
+        return paragraphs == null ? 0 : paragraphs.size();
     }
 
     @Override
@@ -63,7 +65,7 @@ public class DocumentElementAdapter extends BaseExpandableListAdapter {
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return childPosition*groupPosition;
+        return childPosition * groupPosition;
     }
 
     @Override
@@ -73,11 +75,11 @@ public class DocumentElementAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        ChapterItemView chapterItemView;
+        ChapterItemEditView chapterItemView;
         if (convertView == null) {
-            chapterItemView = ChapterItemView_.build(context);
+            chapterItemView = ChapterItemEditView_.build(context);
         } else {
-            chapterItemView = (ChapterItemView) convertView;
+            chapterItemView = (ChapterItemEditView) convertView;
         }
         chapterItemView.bindChapter(getGroup(groupPosition));
 
@@ -86,13 +88,13 @@ public class DocumentElementAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        ParagraphItemView paragraphItemView;
+        ParagraphItemEditView paragraphItemEditView;
         if (convertView == null) {
-            paragraphItemView = ParagraphItemView_.build(context);
+            paragraphItemEditView = ParagraphItemEditView_.build(context);
         } else {
-            paragraphItemView = (ParagraphItemView) convertView;
+            paragraphItemEditView = (ParagraphItemEditView) convertView;
         }
-        return paragraphItemView;
+        return paragraphItemEditView;
     }
 
     @Override

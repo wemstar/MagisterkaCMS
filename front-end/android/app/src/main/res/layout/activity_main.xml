@@ -13,10 +13,11 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-        <fragment android:name="pl.edu.agh.fis.fragment.document.DocumentFragment_"
+        <fragment
             android:id="@+id/headlines_fragment"
             android:layout_weight="1"
             android:layout_width="match_parent"
+            android:name="pl.edu.agh.fis.fragment.document.DocumentFragment_"
             android:layout_height="match_parent" />
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatingButton"

@@ -9,18 +9,17 @@ import org.androidannotations.annotations.FocusChange;
 import org.androidannotations.annotations.ViewById;
 
 import pl.edu.agh.fis.R;
-import pl.edu.agh.fis.dto.document.ChapterDTO;
 import pl.edu.agh.fis.dto.document.ParagraphDTO;
 
 /**
  * Created by wemstar on 2016-05-14.
  */
-@EViewGroup(R.layout.chapter_layout)
-public class ParagraphItemView  extends LinearLayout {
+@EViewGroup(R.layout.edit_text_layout)
+public class ParagraphItemEditView extends LinearLayout {
 
     private ParagraphDTO paragraph;
 
-    public ParagraphItemView(Context context) {
+    public ParagraphItemEditView(Context context) {
         super(context);
     }
 

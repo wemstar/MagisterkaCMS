@@ -13,24 +13,19 @@ import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
-import java.util.ArrayList;
-
 import pl.edu.agh.fis.R;
-import pl.edu.agh.fis.activity.document.create.CreateDocumentActivity_;
 import pl.edu.agh.fis.activity.document.paragraph.list.ParagraphListActivity;
 import pl.edu.agh.fis.activity.document.paragraph.list.ParagraphListActivity_;
 import pl.edu.agh.fis.adapter.list.chapter.ChapterListAdapter;
 import pl.edu.agh.fis.builder.dto.document.ChapterDTOBuilder;
-import pl.edu.agh.fis.builder.dto.document.DocumentDTOBuilder;
 import pl.edu.agh.fis.dto.document.ChapterDTO;
 import pl.edu.agh.fis.dto.document.DocumentDTO;
-import pl.edu.agh.fis.dto.document.ParagraphDTO;
 
 /**
  * Created by wemstar on 2016-05-18.
  */
-@EActivity(R.layout.activity_chapter_list)
-@OptionsMenu(R.menu.chapter_list_menu)
+@EActivity(R.layout.activity_floating_button_list)
+@OptionsMenu(R.menu.save_only_menu)
 public class ChapterListActivity extends AppCompatActivity {
 
     public static final String DOCUMENT_INTENT = "DOCUMENT_INTENT";
@@ -41,14 +36,14 @@ public class ChapterListActivity extends AppCompatActivity {
     @Bean
     ChapterListAdapter adapter;
 
-    @ViewById
-    ListView chapterList;
+    @ViewById(R.id.listView)
+    ListView listView;
 
     @AfterViews
     void initTable() {
         document = (DocumentDTO) getIntent().getSerializableExtra(DOCUMENT_INTENT);
         adapter.setDocument(document);
-        chapterList.setAdapter(adapter);
+        listView.setAdapter(adapter);
     }
 
     @Click(R.id.floatingButton)
@@ -57,7 +52,7 @@ public class ChapterListActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    @ItemLongClick(R.id.chapterList)
+    @ItemLongClick(R.id.listView)
     public void itemLongCLicked(int position) {
         currentChapterPosition = position;
         Intent intent = new Intent(this,ParagraphListActivity_.class);

@@ -40,7 +40,7 @@ public class DocumentListAdapter extends BaseAdapter {
     }
 
     @Background
-    void getDocuments() {
+    public void getDocuments() {
         documents = new ArrayList(documentClient.getDocuments().getContent());
     }
 

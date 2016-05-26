@@ -22,14 +22,14 @@ import pl.edu.agh.fis.dto.document.ChapterDTO;
 /**
  * Created by wemstar on 2016-05-24.
  */
-@EActivity(R.layout.activity_chapter_list)
-@OptionsMenu(R.menu.chapter_list_menu)
+@EActivity(R.layout.activity_floating_button_list)
+@OptionsMenu(R.menu.save_only_menu)
 public class ParagraphListActivity extends AppCompatActivity {
     public static final String PARAGRAPH_INTENT = "PARAGRAPH_INTENT";
 
     private ChapterDTO chapter;
 
-    @ViewById(R.id.chapterList)
+    @ViewById(R.id.listView)
     ListView listView;
 
     @Bean

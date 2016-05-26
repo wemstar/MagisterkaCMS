@@ -18,12 +18,12 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 
 import pl.edu.agh.fis.R;
-import pl.edu.agh.fis.activity.document.create.CreateDocumentActivity_;
+import pl.edu.agh.fis.activity.document.details.DetailsDocumentActivity_;
 import pl.edu.agh.fis.fragment.document.DocumentFragment;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity
-implements NavigationDrawerFragment.NavigationDrawerCallbacks, DocumentFragment.OnFragmentInteractionListener {
+implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -78,14 +78,9 @@ implements NavigationDrawerFragment.NavigationDrawerCallbacks, DocumentFragment.
         actionBar.setTitle(mTitle);
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
     @Click(R.id.floatingButton)
     void updateBookmarksClicked() {
-        Intent intent = new Intent(this,CreateDocumentActivity_.class);
+        Intent intent = new Intent(this,DetailsDocumentActivity_.class);
         startActivity(intent);
     }
 

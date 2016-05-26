@@ -30,7 +30,7 @@
             android:name=".activity.main.MainActivity_"
             android:label="@string/title_activity_main" />
         <activity
-            android:name=".activity.document.create.CreateDocumentActivity_"
+            android:name=".activity.document.details.DetailsDocumentActivity_"
             android:label="@string/title_activity_create_document"></activity>
         <activity
             android:name=".activity.document.chapter.list.ChapterListActivity_"

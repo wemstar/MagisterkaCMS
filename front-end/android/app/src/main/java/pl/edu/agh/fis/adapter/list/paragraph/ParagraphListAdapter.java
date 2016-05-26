@@ -10,8 +10,8 @@ import org.androidannotations.annotations.RootContext;
 
 import pl.edu.agh.fis.dto.document.ChapterDTO;
 import pl.edu.agh.fis.dto.document.ParagraphDTO;
-import pl.edu.agh.fis.view.document.paragraph.ParagraphItemView;
-import pl.edu.agh.fis.view.document.paragraph.ParagraphItemView_;
+import pl.edu.agh.fis.view.document.paragraph.ParagraphItemEditView;
+import pl.edu.agh.fis.view.document.paragraph.ParagraphItemEditView_;
 
 /**
  * Created by wemstar on 2016-05-24.
@@ -41,11 +41,11 @@ public class ParagraphListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ParagraphItemView chapterItemView;
+        ParagraphItemEditView chapterItemView;
         if (convertView == null) {
-            chapterItemView = ParagraphItemView_.build(context);
+            chapterItemView = ParagraphItemEditView_.build(context);
         } else {
-            chapterItemView = (ParagraphItemView) convertView;
+            chapterItemView = (ParagraphItemEditView) convertView;
         }
 
         chapterItemView.bindParagraph(getItem(position));

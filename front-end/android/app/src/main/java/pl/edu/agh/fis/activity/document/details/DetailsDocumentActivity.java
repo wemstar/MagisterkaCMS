@@ -1,4 +1,4 @@
-package pl.edu.agh.fis.activity.document.create;
+package pl.edu.agh.fis.activity.document.details;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -22,21 +22,24 @@ import pl.edu.agh.fis.R;
 import pl.edu.agh.fis.activity.document.chapter.list.ChapterListActivity;
 import pl.edu.agh.fis.activity.document.chapter.list.ChapterListActivity_;
 import pl.edu.agh.fis.adapter.list.document.element.DocumentElementAdapter;
-import pl.edu.agh.fis.builder.dto.document.ChapterDTOBuilder;
 import pl.edu.agh.fis.builder.dto.document.DocumentDTOBuilder;
 import pl.edu.agh.fis.dto.document.ChapterDTO;
 import pl.edu.agh.fis.dto.document.DocumentDTO;
-import pl.edu.agh.fis.dto.document.ParagraphDTO;
 import pl.edu.agh.fis.rest.document.DocumentClient;
 
-@EActivity(R.layout.activity_create_document)
-@OptionsMenu(R.menu.create_document_menu)
-public class CreateDocumentActivity extends AppCompatActivity {
+@EActivity(R.layout.activity_expandable_list_floating_button)
+@OptionsMenu(R.menu.save_only_menu)
+public class DetailsDocumentActivity extends AppCompatActivity {
+
+    public static final String DOCUMENT_DETAILS_INTENT = "DOCUMENT_DETAILS_INTENT";
 
     DocumentDTO document;
 
     @ViewById
     ExpandableListView documentContent;
+
+    @ViewById
+    EditText documentTitle;
 
     @Bean
     DocumentElementAdapter adapter;
@@ -46,7 +49,12 @@ public class CreateDocumentActivity extends AppCompatActivity {
 
     @AfterViews
     void initTable() {
-        document = DocumentDTOBuilder.aDocumentDTO().chapters(new ArrayList<ChapterDTO>()).build();
+        if (getIntent().getSerializableExtra(DOCUMENT_DETAILS_INTENT) != null) {
+            document = (DocumentDTO) getIntent().getSerializableExtra(DOCUMENT_DETAILS_INTENT);
+            documentTitle.setText(document.title);
+        } else {
+            document = DocumentDTOBuilder.aDocumentDTO().chapters(new ArrayList<ChapterDTO>()).build();
+        }
         adapter.setDocument(document);
         documentContent.setAdapter(adapter);
     }
@@ -56,8 +64,9 @@ public class CreateDocumentActivity extends AppCompatActivity {
         document.title = editText.getText().toString();
     }
 
-    @OptionsItem(R.id.action_add_chapter)
+    @Click(R.id.floatingButton)
     void addChapter() {
+        document.title = documentTitle.getText().toString();
         createChapter();
         adapter.notifyDataSetChanged();
     }

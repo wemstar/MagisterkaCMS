@@ -10,8 +10,8 @@ import org.androidannotations.annotations.RootContext;
 
 import pl.edu.agh.fis.dto.document.ChapterDTO;
 import pl.edu.agh.fis.dto.document.DocumentDTO;
-import pl.edu.agh.fis.view.document.chapter.ChapterItemView;
-import pl.edu.agh.fis.view.document.chapter.ChapterItemView_;
+import pl.edu.agh.fis.view.document.chapter.ChapterItemEditView;
+import pl.edu.agh.fis.view.document.chapter.ChapterItemEditView_;
 
 /**
  * Created by wemstar on 2016-05-18.
@@ -41,16 +41,16 @@ public class ChapterListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ChapterItemView chapterItemView;
+        ChapterItemEditView chapterItemEditView;
         if (convertView == null) {
-            chapterItemView = ChapterItemView_.build(context);
+            chapterItemEditView = ChapterItemEditView_.build(context);
         } else {
-            chapterItemView = (ChapterItemView) convertView;
+            chapterItemEditView = (ChapterItemEditView) convertView;
         }
 
-        chapterItemView.bindChapter(getItem(position));
+        chapterItemEditView.bindChapter(getItem(position));
 
-        return chapterItemView;
+        return chapterItemEditView;
     }
 
     public void setDocument(DocumentDTO document) {
