@@ -1,16 +1,20 @@
 package pl.edu.agh.fis.fragment.document;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ListView;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.ItemLongClick;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
@@ -19,6 +23,7 @@ import pl.edu.agh.fis.R;
 import pl.edu.agh.fis.activity.document.details.DetailsDocumentActivity;
 import pl.edu.agh.fis.activity.document.details.DetailsDocumentActivity_;
 import pl.edu.agh.fis.adapter.list.document.DocumentListAdapter;
+import pl.edu.agh.fis.commons.CommonsAlert;
 
 
 @EFragment(R.layout.fragment_document)
@@ -47,16 +52,32 @@ public class DocumentFragment extends Fragment {
         });
     }
 
-    @ItemLongClick(R.id.listView)
+    @ItemClick(R.id.listView)
     void onListItemClick(int position) {
         Intent intent = new Intent(getActivity(), DetailsDocumentActivity_.class);
         intent.putExtra(DetailsDocumentActivity.DOCUMENT_DETAILS_INTENT, documentListAdapter.getItem(position));
         startActivity(intent);
     }
 
+    @ItemLongClick(R.id.listView)
+    void onListItemLongClick(final int position) {
+        CommonsAlert.showDialogBox(this.getContext(),new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deleteDocument(position);
+            }
+        });
+    }
+
     @UiThread
     void refreshAdapter() {
         documentListAdapter.notifyDataSetChanged();
         swipeRefresh.setRefreshing(false);
+    }
+
+    private void deleteDocument(int position) {
+        documentListAdapter.deleteDocument(position);
+        documentListAdapter.getDocuments();
+        refreshAdapter();
     }
 }

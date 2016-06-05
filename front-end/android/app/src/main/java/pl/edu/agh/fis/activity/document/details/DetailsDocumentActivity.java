@@ -11,6 +11,7 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.FocusChange;
+import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
@@ -73,13 +74,18 @@ public class DetailsDocumentActivity extends AppCompatActivity {
 
     @OptionsItem(R.id.action_save)
     void saveDocument() {
+        document.title = documentTitle.getText().toString();
         sendDocument();
         finish();
     }
 
     @Background
     void sendDocument() {
-        documentClient.createDocument(document);
+        if(document.id == null || document.id.isEmpty())
+            documentClient.createDocument(document);
+        else
+            documentClient.updateDocument(document.id,document);
+
     }
 
     private void createChapter() {
@@ -93,7 +99,7 @@ public class DetailsDocumentActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if(resultCode == RESULT_OK){
-                document = (DocumentDTO) data.getSerializableExtra(ChapterListActivity.DOCUMENT_INTENT);
+                this.document = (DocumentDTO) data.getSerializableExtra(ChapterListActivity.DOCUMENT_INTENT);
                 adapter.setDocument(document);
                 adapter.notifyDataSetChanged();
             }

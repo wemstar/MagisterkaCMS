@@ -16,7 +16,7 @@ import javax.annotation.PostConstruct;
 @Configuration
 public class LogstashConfiguration {
 
-    @Value("${logstash-adres}")
+    /*@Value("${logstash-adres}")
     private String logstashAdres;
 
     @Value("${spring.application.name}")
@@ -29,5 +29,5 @@ public class LogstashConfiguration {
         Logger rootLogger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
         LoggerContext loggerContext = rootLogger.getLoggerContext();
         logstashTcpSocketAppender = LogstashLogbackConfig.configLogger(rootLogger,loggerContext,logstashAdres,appname);
-    }
+    }*/
 }

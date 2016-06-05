@@ -6,5 +6,5 @@ import java.util.List;
  * Created by wemstar on 2016-04-13.
  */
 public class ParagraphEntity {
-    List<String> content;
+    public List<String> content;
 }

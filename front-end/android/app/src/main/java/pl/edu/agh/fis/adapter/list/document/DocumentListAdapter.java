@@ -72,4 +72,9 @@ public class DocumentListAdapter extends BaseAdapter {
 
         return documentItemView;
     }
+
+    @Background
+    public void deleteDocument(int position) {
+        documentClient.deleteDocument(documents.get(position).id);
+    }
 }

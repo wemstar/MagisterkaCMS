@@ -10,7 +10,7 @@ import net.logstash.logback.appender.LogstashTcpSocketAppender;
  */
 public class LogstashLogbackConfig {
 
-    public static LogstashTcpSocketAppender configLogger(Logger rootLogger, LoggerContext loggerContext,String logstashAdres,String appname) {
+    /*public static LogstashTcpSocketAppender configLogger(Logger rootLogger, LoggerContext loggerContext,String logstashAdres,String appname) {
         LogstashTcpSocketAppender logstashTcpSocketAppender = new LogstashTcpSocketAppender();
         logstashTcpSocketAppender.setName("TCP");
         logstashTcpSocketAppender.setContext(loggerContext);
@@ -26,8 +26,8 @@ public class LogstashLogbackConfig {
         logstashTcpSocketAppender.start();
 
         rootLogger.addAppender(logstashTcpSocketAppender);
-        /*rootLogger.setLevel(Level.DEBUG);
-        rootLogger.warn(logstashAdres);*/
+        rootLogger.setLevel(Level.DEBUG);
+        rootLogger.warn(logstashAdres);
         return logstashTcpSocketAppender;
-    }
+    }*/
 }

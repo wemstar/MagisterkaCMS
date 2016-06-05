@@ -1,5 +1,6 @@
 package pl.edu.agh.fis.activity.document.chapter.list;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
@@ -8,6 +9,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.ItemLongClick;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
@@ -18,6 +20,7 @@ import pl.edu.agh.fis.activity.document.paragraph.list.ParagraphListActivity;
 import pl.edu.agh.fis.activity.document.paragraph.list.ParagraphListActivity_;
 import pl.edu.agh.fis.adapter.list.chapter.ChapterListAdapter;
 import pl.edu.agh.fis.builder.dto.document.ChapterDTOBuilder;
+import pl.edu.agh.fis.commons.CommonsAlert;
 import pl.edu.agh.fis.dto.document.ChapterDTO;
 import pl.edu.agh.fis.dto.document.DocumentDTO;
 
@@ -53,12 +56,22 @@ public class ChapterListActivity extends AppCompatActivity {
     }
 
     @ItemLongClick(R.id.listView)
-    public void itemLongCLicked(int position) {
+    public void itemCLicked(int position) {
         currentChapterPosition = position;
         Intent intent = new Intent(this,ParagraphListActivity_.class);
         intent.putExtra(ParagraphListActivity.PARAGRAPH_INTENT,document.chapters.get(position));
         startActivityForResult(intent,1);
     }
+
+   /* @ItemLongClick(R.id.listView)
+    public void itemLongCLicked(final int position) {
+        CommonsAlert.showDialogBox(this, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deleteDocument(position);
+            }
+        });
+    }*/
 
     @OptionsItem(R.id.action_save)
     void saveDocument() {
@@ -75,9 +88,14 @@ public class ChapterListActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK){
                 ChapterDTO chapter = (ChapterDTO) data.getSerializableExtra(ParagraphListActivity.PARAGRAPH_INTENT);
                 document.chapters.set(currentChapterPosition,chapter);
+                adapter.setDocument(document);
                 adapter.notifyDataSetChanged();
             }
         }
     }
 
+    private void deleteDocument(int position) {
+        document.chapters.remove(position);
+        adapter.notifyDataSetChanged();
+    }
 }

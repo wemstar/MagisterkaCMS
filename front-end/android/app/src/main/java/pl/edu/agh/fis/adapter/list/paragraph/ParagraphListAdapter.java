@@ -41,16 +41,16 @@ public class ParagraphListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ParagraphItemEditView chapterItemView;
+        ParagraphItemEditView paragraphItemView;
         if (convertView == null) {
-            chapterItemView = ParagraphItemEditView_.build(context);
+            paragraphItemView = ParagraphItemEditView_.build(context);
         } else {
-            chapterItemView = (ParagraphItemEditView) convertView;
+            paragraphItemView = (ParagraphItemEditView) convertView;
         }
 
-        chapterItemView.bindParagraph(getItem(position));
+        paragraphItemView.bindParagraph(getItem(position));
 
-        return chapterItemView;
+        return paragraphItemView;
     }
 
     public void setChapter(ChapterDTO chapter) {

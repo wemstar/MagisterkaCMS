@@ -1,8 +1,11 @@
 package pl.edu.agh.fis.rest.document;
 
 import org.androidannotations.rest.spring.annotations.Body;
+import org.androidannotations.rest.spring.annotations.Delete;
 import org.androidannotations.rest.spring.annotations.Get;
+import org.androidannotations.rest.spring.annotations.Path;
 import org.androidannotations.rest.spring.annotations.Post;
+import org.androidannotations.rest.spring.annotations.Put;
 import org.androidannotations.rest.spring.annotations.RequiresHeader;
 import org.androidannotations.rest.spring.annotations.Rest;
 import org.androidannotations.rest.spring.api.RestClientHeaders;
@@ -27,4 +30,12 @@ public interface DocumentClient extends RestClientHeaders {
     @Post(value = "/document-server/document")
     @RequiresHeader("x-auth-token")
     void createDocument(@Body DocumentDTO document);
+
+    @Put(value = "/document-server/document/{id}")
+    @RequiresHeader("x-auth-token")
+    void updateDocument(@Path String id, @Body DocumentDTO document);
+
+    @Delete(value = "/document-server/document/{id}")
+    @RequiresHeader("x-auth-token")
+    void deleteDocument(@Path String id);
 }

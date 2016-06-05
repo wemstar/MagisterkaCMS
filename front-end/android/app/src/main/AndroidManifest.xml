@@ -34,10 +34,13 @@
             android:label="@string/title_activity_create_document"></activity>
         <activity
             android:name=".activity.document.chapter.list.ChapterListActivity_"
-            android:label="@string/title_activity_create_document"></activity>
+            android:label="@string/title_activity_chapter_list"></activity>
         <activity
             android:name=".activity.document.paragraph.list.ParagraphListActivity_"
-            android:label="@string/title_activity_create_document"></activity>
+            android:label="@string/title_activity_paragraph_document"></activity>
+        <activity
+            android:name=".activity.document.paragraph.details.ParagraphDetailsActivity_"
+            android:label="@string/title_activity_paragraph_document"></activity>
     </application>
 
 </manifest>

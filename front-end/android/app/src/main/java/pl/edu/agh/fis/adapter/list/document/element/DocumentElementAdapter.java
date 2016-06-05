@@ -15,6 +15,8 @@ import pl.edu.agh.fis.dto.document.DocumentDTO;
 import pl.edu.agh.fis.dto.document.ParagraphDTO;
 import pl.edu.agh.fis.view.document.chapter.ChapterItemEditView;
 import pl.edu.agh.fis.view.document.chapter.ChapterItemEditView_;
+import pl.edu.agh.fis.view.document.chapter.ChapterItemView;
+import pl.edu.agh.fis.view.document.chapter.ChapterItemView_;
 import pl.edu.agh.fis.view.document.paragraph.ParagraphItemEditView;
 import pl.edu.agh.fis.view.document.paragraph.ParagraphItemEditView_;
 
@@ -75,11 +77,11 @@ public class DocumentElementAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        ChapterItemEditView chapterItemView;
+        ChapterItemView chapterItemView;
         if (convertView == null) {
-            chapterItemView = ChapterItemEditView_.build(context);
+            chapterItemView = ChapterItemView_.build(context);
         } else {
-            chapterItemView = (ChapterItemEditView) convertView;
+            chapterItemView = (ChapterItemView) convertView;
         }
         chapterItemView.bindChapter(getGroup(groupPosition));
 
@@ -94,6 +96,7 @@ public class DocumentElementAdapter extends BaseExpandableListAdapter {
         } else {
             paragraphItemEditView = (ParagraphItemEditView) convertView;
         }
+        paragraphItemEditView.bindParagraph(getChild(groupPosition, childPosition));
         return paragraphItemEditView;
     }
 
