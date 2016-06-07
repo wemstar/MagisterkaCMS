@@ -127,4 +127,6 @@
     <string name="title_activity_paragraph_document">Paragraph list</string>
     <string name="prompt_document_title">Document Title</string>
     <string name="action_save" >Save</string>
+    <string name="action_create_document" >Create new document</string>
+    <string name="action_create_template" >Create new template</string>
 </resources>

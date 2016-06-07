@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,8 +17,10 @@ import android.view.ViewGroup;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OptionsItem;
 
 import pl.edu.agh.fis.R;
+import pl.edu.agh.fis.activity.application.template.ApplicationTemplateDetailsActivity_;
 import pl.edu.agh.fis.activity.document.details.DetailsDocumentActivity_;
 import pl.edu.agh.fis.fragment.document.DocumentFragment;
 
@@ -71,16 +74,21 @@ implements NavigationDrawerFragment.NavigationDrawerCallbacks {
         }
     }
 
-    public void restoreActionBar() {
-        ActionBar actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
-    }
-
     @Click(R.id.floatingButton)
     void updateBookmarksClicked() {
         Intent intent = new Intent(this,DetailsDocumentActivity_.class);
+        startActivity(intent);
+    }
+
+    @OptionsItem(R.id.action_create_document)
+    void createDocument() {
+        Intent intent = new Intent(this,DetailsDocumentActivity_.class);
+        startActivity(intent);
+    }
+
+    @OptionsItem(R.id.action_create_template)
+    void createTemplate() {
+        Intent intent = new Intent(this,ApplicationTemplateDetailsActivity_.class);
         startActivity(intent);
     }
 
@@ -117,7 +125,7 @@ implements NavigationDrawerFragment.NavigationDrawerCallbacks {
         }
 
         @Override
-        public void onAttach(Activity activity) {
+        public void onAttach(Context activity) {
             super.onAttach(activity);
             ((MainActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));

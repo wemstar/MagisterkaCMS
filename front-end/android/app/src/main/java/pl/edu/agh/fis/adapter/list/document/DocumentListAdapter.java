@@ -13,6 +13,7 @@ import org.androidannotations.annotations.RootContext;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import pl.edu.agh.fis.dto.document.DocumentDTO;
@@ -26,7 +27,7 @@ import pl.edu.agh.fis.view.document.list.item.DocumentItemView_;
 @EBean
 public class DocumentListAdapter extends BaseAdapter {
 
-    List<DocumentDTO> documents =  new ArrayList<>();
+    ArrayList<DocumentDTO> documents =  new ArrayList<>();
 
     @RestService
     DocumentClient documentClient;
@@ -41,7 +42,7 @@ public class DocumentListAdapter extends BaseAdapter {
 
     @Background
     public void getDocuments() {
-        documents = new ArrayList(documentClient.getDocuments().getContent());
+        documents = new ArrayList<DocumentDTO>(documentClient.getDocuments().getContent());
     }
 
     @Override
