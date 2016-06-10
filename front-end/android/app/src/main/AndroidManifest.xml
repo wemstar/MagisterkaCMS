@@ -28,6 +28,7 @@
             android:label="Android" />
         <activity
             android:name=".activity.main.MainActivity_"
+            android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/title_activity_main" />
         <activity
             android:name=".activity.document.details.DetailsDocumentActivity_"

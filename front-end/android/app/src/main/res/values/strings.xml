@@ -129,4 +129,12 @@
     <string name="action_save" >Save</string>
     <string name="action_create_document" >Create new document</string>
     <string name="action_create_template" >Create new template</string>
+
+    <string-array name="application_template_filed_type">
+        <item>String</item>
+        <item>Decimal</item>
+        <item>Date</item>
+        <item>Integer</item>
+        <item>Bool</item>
+    </string-array>
 </resources>
