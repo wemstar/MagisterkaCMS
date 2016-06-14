@@ -46,7 +46,7 @@ public class ApplicationTemplateDetailsAdapter extends BaseAdapter {
         } else {
             applicationTemplateItemView = (ApplicationTemplateItem) convertView;
         }
-
+        applicationTemplateItemView.bindField(getItem(position));
         return applicationTemplateItemView;
     }
 

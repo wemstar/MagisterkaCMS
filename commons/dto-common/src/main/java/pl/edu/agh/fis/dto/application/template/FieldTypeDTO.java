@@ -1,9 +1,11 @@
-package pl.edu.agh.fis.application.template;
+package pl.edu.agh.fis.dto.application.template;
+
+import java.io.Serializable;
 
 /**
  * Created by wemstar on 2016-04-13.
  */
-public enum FieldType {
+public enum FieldTypeDTO implements Serializable {
     STRING_TYPE("String"),
     INTEGER_TYPE("Integer"),
     DATE_TYPE("Date"),
@@ -12,7 +14,7 @@ public enum FieldType {
 
     private final String value;
 
-    FieldType(String value) {
+    FieldTypeDTO(String value) {
         this.value = value;
     }
 
@@ -20,7 +22,7 @@ public enum FieldType {
         return value;
     }
 
-    public static FieldType getFromString(String stringValue) {
+    public static FieldTypeDTO getFromString(String stringValue) {
         switch (stringValue) {
             case "String":
                 return STRING_TYPE;

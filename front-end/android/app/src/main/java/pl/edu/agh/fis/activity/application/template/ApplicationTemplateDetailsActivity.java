@@ -1,12 +1,15 @@
 package pl.edu.agh.fis.activity.application.template;
 
 import android.support.v7.app.AppCompatActivity;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.FocusChange;
 import org.androidannotations.annotations.ItemLongClick;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
@@ -17,12 +20,12 @@ import java.util.ArrayList;
 
 import pl.edu.agh.fis.R;
 import pl.edu.agh.fis.adapter.list.application.template.ApplicationTemplateDetailsAdapter;
-import pl.edu.agh.fis.builder.dto.document.template.ApplicationTemplateDTOBuilder;
-import pl.edu.agh.fis.builder.dto.document.template.TemplateFieldsDTOBuilder;
+import pl.edu.agh.fis.builder.dto.application.template.ApplicationTemplateDTOBuilder;
+import pl.edu.agh.fis.builder.dto.application.template.TemplateFieldsDTOBuilder;
 import pl.edu.agh.fis.dto.application.template.ApplicationTemplateDTO;
+import pl.edu.agh.fis.dto.application.template.FieldTypeDTO;
 import pl.edu.agh.fis.dto.application.template.TemplateFieldsDTO;
 import pl.edu.agh.fis.rest.application.tempalte.ApplicationTemplateClient;
-import pl.edu.agh.fis.rest.document.DocumentClient;
 
 /**
  * Created by wemstar on 2016-06-07.
@@ -41,6 +44,9 @@ public class ApplicationTemplateDetailsActivity extends AppCompatActivity {
     @Bean
     ApplicationTemplateDetailsAdapter adapter;
 
+    @ViewById
+    EditText templateName;
+
     @ViewById(R.id.listView)
     ListView listView;
 
@@ -57,7 +63,7 @@ public class ApplicationTemplateDetailsActivity extends AppCompatActivity {
 
     @Click(R.id.floatingButton)
     void updateBookmarksClicked() {
-        template.fields.add(TemplateFieldsDTOBuilder.aTemplateFieldsDTO().build());
+        template.fields.add(TemplateFieldsDTOBuilder.aTemplateFieldsDTO().type(FieldTypeDTO.STRING_TYPE).build());
         adapter.notifyDataSetChanged();
     }
 
@@ -68,11 +74,22 @@ public class ApplicationTemplateDetailsActivity extends AppCompatActivity {
     }
 
     @OptionsItem(R.id.action_save)
+    void actionSaveClicked() {
+        saveDocument();
+        finish();
+    }
+
+    @FocusChange(R.id.templateName)
+    void focusChangedOnTemplateName(EditText editText) {
+        template.title = editText.getText().toString();
+    }
+
+    @Background
     void saveDocument() {
-       if(template.id != null) {
-           templateClient.updateTamplate(template.id,template);
-       } else {
-           templateClient.createTemplate(template);
-       }
+        if (template.id != null) {
+            templateClient.updateTemplate(template.id, template);
+        } else {
+            templateClient.createTemplate(template);
+        }
     }
 }

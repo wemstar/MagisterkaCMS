@@ -1,6 +1,6 @@
-package pl.edu.agh.fis.builder.dto.document.template;
+package pl.edu.agh.fis.builder.dto.application.template;
 
-import pl.edu.agh.fis.dto.application.template.FieldType;
+import pl.edu.agh.fis.dto.application.template.FieldTypeDTO;
 import pl.edu.agh.fis.dto.application.template.TemplateFieldsDTO;
 
 /**
@@ -8,7 +8,7 @@ import pl.edu.agh.fis.dto.application.template.TemplateFieldsDTO;
  */
 public class TemplateFieldsDTOBuilder {
 
-    private FieldType type;
+    private FieldTypeDTO type;
     private String filedName;
     private String defaultValue;
 
@@ -19,7 +19,7 @@ public class TemplateFieldsDTOBuilder {
         return new TemplateFieldsDTOBuilder();
     }
 
-    public TemplateFieldsDTOBuilder type(FieldType type) {
+    public TemplateFieldsDTOBuilder type(FieldTypeDTO type) {
         this.type = type;
         return this;
     }

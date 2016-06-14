@@ -1,4 +1,4 @@
-package pl.edu.agh.fis.builder.dto.document.template;
+package pl.edu.agh.fis.builder.dto.application.template;
 
 import java.util.List;
 

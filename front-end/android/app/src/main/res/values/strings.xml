@@ -129,6 +129,10 @@
     <string name="action_save" >Save</string>
     <string name="action_create_document" >Create new document</string>
     <string name="action_create_template" >Create new template</string>
+    <string name="prompt_field_name">Field Name</string>
+    <string name="title_activity_paragraph_application_template_list">Template List</string>
+    <string name="title_activity_application_template_details">Template Details</string>
+    <string name="title_activity_create_application">Create application</string>
 
     <string-array name="application_template_filed_type">
         <item>String</item>

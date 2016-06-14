@@ -44,7 +44,13 @@
             android:label="@string/title_activity_paragraph_document"></activity>
         <activity
             android:name=".activity.application.template.ApplicationTemplateDetailsActivity_"
-            android:label="@string/title_activity_paragraph_document"></activity>
+            android:label="@string/title_activity_application_template_details"></activity>
+        <activity
+            android:name=".activity.application.template.ApplicationTemplateListActivity_"
+            android:label="@string/title_activity_paragraph_application_template_list"></activity>
+        <activity
+            android:name=".activity.application.ApplicationCreateActivity_"
+            android:label="@string/title_activity_create_application"></activity>
         ApplicationTemplateDetailsActivity
     </application>
 
