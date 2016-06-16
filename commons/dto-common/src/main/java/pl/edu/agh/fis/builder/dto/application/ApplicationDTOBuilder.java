@@ -12,6 +12,7 @@ public class ApplicationDTOBuilder {
 
     private String id;
     private String title;
+    private String templateId;
     private List<FieldDTO> fields;
 
     private ApplicationDTOBuilder() {
@@ -31,6 +32,11 @@ public class ApplicationDTOBuilder {
         return this;
     }
 
+    public ApplicationDTOBuilder templateId(String templateId) {
+        this.templateId = templateId;
+        return this;
+    }
+
     public ApplicationDTOBuilder fields(List<FieldDTO> fields) {
         this.fields = fields;
         return this;
@@ -40,6 +46,7 @@ public class ApplicationDTOBuilder {
         ApplicationDTO templateDTO = new ApplicationDTO();
         templateDTO.id = id;
         templateDTO.title = title;
+        templateDTO.templateId = templateId;
         templateDTO.fields = fields;
         return templateDTO;
     }

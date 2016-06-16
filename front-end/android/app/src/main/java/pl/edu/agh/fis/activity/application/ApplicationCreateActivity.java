@@ -77,15 +77,16 @@ public class ApplicationCreateActivity extends AppCompatActivity {
         List<FieldDTO> fields = new ArrayList<>();
         for (TemplateFieldsDTO field : applicationTemplateDTO.fields) {
             fields.add(FieldDTOBuilder.aFieldDTO()
-                    .type(field.type)
-                    .filedName(field.filedName)
-                    .value(field.defaultValue)
+                    .fieldType(field.type)
+                    .title(field.filedName)
+                    .fieldValue(field.defaultValue)
                     .build());
         }
 
         applicationDTO = ApplicationDTOBuilder.anApplicationTemplateDTO()
                 .fields(fields)
                 .title(applicationTemplateDTO.title)
+                .templateId(applicationTemplateDTO.id)
                 .build();
 
     }

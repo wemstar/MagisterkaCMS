@@ -7,9 +7,9 @@ import pl.edu.agh.fis.dto.application.template.FieldTypeDTO;
  * Created by wemstar on 2016-06-14.
  */
 public class FieldDTOBuilder {
-    private FieldTypeDTO type;
-    private String filedName;
-    private String value;
+    private FieldTypeDTO fieldType;
+    private String title;
+    private String fieldValue;
 
     private FieldDTOBuilder() {
     }
@@ -18,27 +18,27 @@ public class FieldDTOBuilder {
         return new FieldDTOBuilder();
     }
 
-    public FieldDTOBuilder type(FieldTypeDTO type) {
-        this.type = type;
+    public FieldDTOBuilder fieldType(FieldTypeDTO fieldType) {
+        this.fieldType = fieldType;
         return this;
     }
 
-    public FieldDTOBuilder filedName(String filedName) {
-        this.filedName = filedName;
+    public FieldDTOBuilder title(String title) {
+        this.title = title;
         return this;
     }
 
-    public FieldDTOBuilder value(String value) {
-        this.value = value;
+    public FieldDTOBuilder fieldValue(String fieldValue) {
+        this.fieldValue = fieldValue;
         return this;
     }
 
 
     public FieldDTO build() {
         FieldDTO templateDTO = new FieldDTO();
-        templateDTO.type = type;
-        templateDTO.filedName = filedName;
-        templateDTO.value = value;
+        templateDTO.fieldType = fieldType;
+        templateDTO.title = title;
+        templateDTO.fieldValue = fieldValue;
         return templateDTO;
     }
 }

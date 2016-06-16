@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.androidannotations.annotations.EViewGroup;
+import org.androidannotations.annotations.FocusChange;
 import org.androidannotations.annotations.ViewById;
 
 import pl.edu.agh.fis.R;
@@ -33,10 +34,15 @@ public class ApplicationFieldItem extends LinearLayout {
     @ViewById
     TextInputLayout fieldNameInputLayout;
 
+    @FocusChange(R.id.fieldValue)
+    void focusChangedFieldNameEditText(EditText editText) {
+        fieldDTO.fieldValue = editText.getText().toString();
+    }
+
     public void bindField(FieldDTO fieldDTO) {
         this.fieldDTO = fieldDTO;
-        fieldType.setText(fieldDTO.type.getValue());
-        fieldValue.setText(fieldDTO.value);
-        fieldNameInputLayout.setHint(fieldDTO.filedName);
+        fieldType.setText(fieldDTO.fieldType.getValue());
+        fieldValue.setText(fieldDTO.fieldValue);
+        fieldNameInputLayout.setHint(fieldDTO.title);
     }
 }

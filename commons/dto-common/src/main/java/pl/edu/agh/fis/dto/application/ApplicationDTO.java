@@ -10,6 +10,7 @@ import java.util.List;
 @JsonIgnoreProperties({"_links"})
 public class ApplicationDTO {
     public String id;
+    public String templateId;
     public String title;
     public List<FieldDTO> fields;
 }
