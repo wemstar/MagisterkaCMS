@@ -19,8 +19,14 @@ repositories {
 def dockerPort = 8080
 apply plugin: com.bmuschko.gradle.docker.DockerRemoteApiPlugin
 docker {
-    url = 'https://192.168.99.100:2376'
-    certPath = new File(System.properties['user.home'], '.docker/machine/machines/default')
+    if ( project.hasProperty("upload-google") ) {
+        url = 'https://104.197.141.176:2376'
+        certPath = new File(System.properties['user.home'], '.docker/machine/machines/vm01')
+    } else {
+        url = 'https://192.168.99.100:2376'
+        certPath = new File(System.properties['user.home'], '.docker/machine/machines/default')
+    }
+
 }
 
 task createDockerfile(type: Dockerfile) {

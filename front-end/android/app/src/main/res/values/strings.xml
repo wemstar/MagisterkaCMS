@@ -133,8 +133,19 @@
     <string name="title_activity_paragraph_application_template_list">Template List</string>
     <string name="title_activity_application_template_details">Template Details</string>
     <string name="title_activity_create_application">Create application</string>
+    <string name="document_section_title">Documents</string>
+    <string name="application_section_title">Applications</string>
+    <string name="template_section_title">Templates</string>
 
     <string-array name="application_template_filed_type">
+        <item>String</item>
+        <item>Decimal</item>
+        <item>Date</item>
+        <item>Integer</item>
+        <item>Bool</item>
+    </string-array>
+
+    <string-array name="action_types">
         <item>String</item>
         <item>Decimal</item>
         <item>Date</item>

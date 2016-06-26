@@ -2,6 +2,7 @@ package pl.edu.agh.fis.builder.dto.application;
 
 import java.util.List;
 
+import pl.edu.agh.fis.dto.activity.ActivityDTO;
 import pl.edu.agh.fis.dto.application.ApplicationDTO;
 import pl.edu.agh.fis.dto.application.FieldDTO;
 
@@ -14,6 +15,7 @@ public class ApplicationDTOBuilder {
     private String title;
     private String templateId;
     private List<FieldDTO> fields;
+    private List<ActivityDTO> activities;
 
     private ApplicationDTOBuilder() {
     }
@@ -37,10 +39,16 @@ public class ApplicationDTOBuilder {
         return this;
     }
 
+    public ApplicationDTOBuilder activities(List<ActivityDTO> activities) {
+        this.activities = activities;
+        return this;
+    }
+
     public ApplicationDTOBuilder fields(List<FieldDTO> fields) {
         this.fields = fields;
         return this;
     }
+
 
     public ApplicationDTO build() {
         ApplicationDTO templateDTO = new ApplicationDTO();
@@ -48,6 +56,7 @@ public class ApplicationDTOBuilder {
         templateDTO.title = title;
         templateDTO.templateId = templateId;
         templateDTO.fields = fields;
+        templateDTO.activities = activities;
         return templateDTO;
     }
 }

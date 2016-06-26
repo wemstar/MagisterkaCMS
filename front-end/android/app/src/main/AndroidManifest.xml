@@ -51,7 +51,10 @@
         <activity
             android:name=".activity.application.ApplicationCreateActivity_"
             android:label="@string/title_activity_create_application"></activity>
-        ApplicationTemplateDetailsActivity
+        <activity android:name=".activity.action.CreateActionActivity_" />
+        <activity
+            android:name=".activity.application.ApplicationDetailsActivity_"
+            android:label="@string/title_activity_create_application" />
     </application>
 
 </manifest>

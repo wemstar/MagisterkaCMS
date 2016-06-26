@@ -20,6 +20,7 @@ import pl.edu.agh.fis.R;
 import pl.edu.agh.fis.adapter.list.application.ApplicationDetailsAdapter;
 import pl.edu.agh.fis.builder.dto.application.ApplicationDTOBuilder;
 import pl.edu.agh.fis.builder.dto.application.FieldDTOBuilder;
+import pl.edu.agh.fis.dto.activity.ActivityDTO;
 import pl.edu.agh.fis.dto.application.ApplicationDTO;
 import pl.edu.agh.fis.dto.application.FieldDTO;
 import pl.edu.agh.fis.dto.application.template.ApplicationTemplateDTO;
@@ -87,6 +88,7 @@ public class ApplicationCreateActivity extends AppCompatActivity {
                 .fields(fields)
                 .title(applicationTemplateDTO.title)
                 .templateId(applicationTemplateDTO.id)
+                .activities(new ArrayList<ActivityDTO>())
                 .build();
 
     }

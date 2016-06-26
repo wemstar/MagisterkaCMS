@@ -1,29 +1,25 @@
 package pl.edu.agh.fis.fragment.document;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
-import android.widget.ListView;
+import android.widget.ExpandableListView;
 
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.ItemClick;
-import org.androidannotations.annotations.ItemLongClick;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
+import java.io.Serializable;
+
 import pl.edu.agh.fis.R;
-import pl.edu.agh.fis.activity.document.details.DetailsDocumentActivity;
+import pl.edu.agh.fis.activity.application.ApplicationDetailsActivity;
+import pl.edu.agh.fis.activity.application.ApplicationDetailsActivity_;
 import pl.edu.agh.fis.activity.document.details.DetailsDocumentActivity_;
 import pl.edu.agh.fis.adapter.list.document.DocumentListAdapter;
-import pl.edu.agh.fis.commons.CommonsAlert;
+import pl.edu.agh.fis.commons.HeaderType;
 
 
 @EFragment(R.layout.fragment_document)
@@ -37,7 +33,7 @@ public class DocumentFragment extends Fragment {
     SwipeRefreshLayout swipeRefresh;
 
     @ViewById
-    ListView listView;
+    ExpandableListView listView;
 
     @AfterViews
     void initAdapter() {
@@ -50,16 +46,33 @@ public class DocumentFragment extends Fragment {
 
             }
         });
+        listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                onListItemClick(groupPosition, childPosition);
+                return true;
+            }
+        });
     }
 
-    @ItemClick(R.id.listView)
-    void onListItemClick(int position) {
-        Intent intent = new Intent(getActivity(), DetailsDocumentActivity_.class);
-        intent.putExtra(DetailsDocumentActivity.DOCUMENT_DETAILS_INTENT, documentListAdapter.getItem(position));
-        startActivity(intent);
+    void onListItemClick(int group, int position) {
+        Intent intent = null;
+        switch (HeaderType.getHederFromInt(group)) {
+            case DOCUMENT:
+                intent = new Intent(getActivity(), DetailsDocumentActivity_.class);
+                intent.putExtra(ApplicationDetailsActivity.APPLICATION_DETAILS, (Serializable) documentListAdapter.getChild(group, position));
+            case APPLICATION:
+                intent = new Intent(getActivity(), ApplicationDetailsActivity_.class);
+                intent.putExtra(ApplicationDetailsActivity.APPLICATION_DETAILS, (Serializable) documentListAdapter.getChild(group, position));
+            case TEMPLATE:
+                intent = new Intent(getActivity(), ApplicationDetailsActivity_.class);
+                intent.putExtra(ApplicationDetailsActivity.APPLICATION_DETAILS, (Serializable) documentListAdapter.getChild(group, position));
+        }
+        if (intent != null)
+            startActivity(intent);
     }
 
-    @ItemLongClick(R.id.listView)
+    /*@ItemLongClick(R.id.listView)
     void onListItemLongClick(final int position) {
         CommonsAlert.showDialogBox(this.getContext(),new DialogInterface.OnClickListener() {
             @Override
@@ -67,7 +80,7 @@ public class DocumentFragment extends Fragment {
                 deleteDocument(position);
             }
         });
-    }
+    }*/
 
     @UiThread
     void refreshAdapter() {
