@@ -22,6 +22,10 @@ docker {
     if ( project.hasProperty("upload-google") ) {
         url = 'https://104.197.141.176:2376'
         certPath = new File(System.properties['user.home'], '.docker/machine/machines/vm01')
+    } else if(project.hasProperty("build-travis")){
+        username = System.getenv('DOCKER_USERNAM')
+        password = System.getenv('DOCKER_PASSWORD')
+        email = System.getenv('DOCKER_EMAIL')
     } else {
         url = 'https://192.168.99.100:2376'
         certPath = new File(System.properties['user.home'], '.docker/machine/machines/default')
