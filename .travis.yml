@@ -7,3 +7,5 @@ before_install:
 
 script:
   - ./gradlew build -Pbuild-travis="" -x test
+after_success:
+  - docker push magisterka-cms/image-edge-server
