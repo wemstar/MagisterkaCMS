@@ -6,4 +6,4 @@ before_install:
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 
 script:
-  - ./gradlew build -Pbuild-travis=""
+  - ./gradlew build -Pbuild-travis="" -x test
