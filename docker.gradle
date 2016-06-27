@@ -50,7 +50,7 @@ task createDockerfile(type: Dockerfile) {
 task buildDockerImage(type: DockerBuildImage,dependsOn:assemble) {
     dependsOn createDockerfile
     inputDir = createDockerfile.destFile.parentFile
-    tag = "magisterka-cms/image-${jar.baseName}"
+    tag = "wemstar/magisterka-cms-image-${jar.baseName}"
 }
 
 build.finalizedBy(buildDockerImage)

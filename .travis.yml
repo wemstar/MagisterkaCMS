@@ -8,4 +8,5 @@ before_install:
 script:
   - ./gradlew build -Pbuild-travis="" -x test
 after_success:
-  - docker push magisterka-cms/image-edge-server
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push wemstar/magisterka-cms-image-edge-server
