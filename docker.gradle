@@ -50,4 +50,4 @@ task buildDockerImage(type: DockerBuildImage,dependsOn:assemble) {
     tag = "magisterka-cms/image-${jar.baseName}"
 }
 
-assemble.finalizedBy(buildDockerImage)
+build.finalizedBy(buildDockerImage)
