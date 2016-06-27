@@ -9,4 +9,8 @@ script:
   - ./gradlew build -Pbuild-travis="" -x test
 after_success:
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push wemstar/magisterka-cms-image-edge-server
+    docker push wemstar/magisterka-cms-image-edge-server;
+    docker push wemstar/magisterka-cms-image-discovery-server;
+    docker push wemstar/magisterka-cms-image-document-microservice;
+    docker push wemstar/magisterka-cms-image-config-server;
+    docker push wemstar/magisterka-cms-image-user-micro-service;
