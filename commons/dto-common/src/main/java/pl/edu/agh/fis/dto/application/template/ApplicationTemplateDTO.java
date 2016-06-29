@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.List;
 
+import pl.edu.agh.fis.dto.activity.ActivityDTO;
+
 /**
  * Created by wemstar on 2016-04-13.
  */
@@ -13,4 +15,5 @@ public class ApplicationTemplateDTO implements Serializable {
     public String id;
     public String title;
     public List<TemplateFieldsDTO> fields;
+    public List<ActivityDTO> activities;
 }

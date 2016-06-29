@@ -11,5 +11,5 @@ public class ActivityDTO implements Serializable {
     public String userId;
     public ActionType actionType;
     public CommentDTO comment;
-    //public ActionDTO action;
+    public ActionDTO action;
 }

@@ -52,14 +52,14 @@ public class ActionsAdapter extends BaseAdapter {
         return actionItemView;
     }
 
-    public void setApplication(List<ActivityDTO> actions) {
+    public void setActions(List<ActivityDTO> actions) {
         this.actions = actions;
         if (this.actions == null) {
             this.actions = new ArrayList<>();
         }
     }
 
-    public List<ActivityDTO> getApplication() {
+    public List<ActivityDTO> getActions() {
         return actions;
     }
 }

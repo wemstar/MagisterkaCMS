@@ -17,6 +17,9 @@ import java.io.Serializable;
 import pl.edu.agh.fis.R;
 import pl.edu.agh.fis.activity.application.ApplicationDetailsActivity;
 import pl.edu.agh.fis.activity.application.ApplicationDetailsActivity_;
+import pl.edu.agh.fis.activity.application.template.ApplicationTemplateDetailsActivity;
+import pl.edu.agh.fis.activity.application.template.ApplicationTemplateDetailsActivity_;
+import pl.edu.agh.fis.activity.document.details.DetailsDocumentActivity;
 import pl.edu.agh.fis.activity.document.details.DetailsDocumentActivity_;
 import pl.edu.agh.fis.adapter.list.document.DocumentListAdapter;
 import pl.edu.agh.fis.commons.HeaderType;
@@ -60,13 +63,16 @@ public class DocumentFragment extends Fragment {
         switch (HeaderType.getHederFromInt(group)) {
             case DOCUMENT:
                 intent = new Intent(getActivity(), DetailsDocumentActivity_.class);
-                intent.putExtra(ApplicationDetailsActivity.APPLICATION_DETAILS, (Serializable) documentListAdapter.getChild(group, position));
+                intent.putExtra(DetailsDocumentActivity.DOCUMENT_DETAILS_INTENT, (Serializable) documentListAdapter.getChild(group, position));
+                break;
             case APPLICATION:
                 intent = new Intent(getActivity(), ApplicationDetailsActivity_.class);
                 intent.putExtra(ApplicationDetailsActivity.APPLICATION_DETAILS, (Serializable) documentListAdapter.getChild(group, position));
+                break;
             case TEMPLATE:
-                intent = new Intent(getActivity(), ApplicationDetailsActivity_.class);
-                intent.putExtra(ApplicationDetailsActivity.APPLICATION_DETAILS, (Serializable) documentListAdapter.getChild(group, position));
+                intent = new Intent(getActivity(), ApplicationTemplateDetailsActivity_.class);
+                intent.putExtra(ApplicationTemplateDetailsActivity.TEMPLATE_INTENT, (Serializable) documentListAdapter.getChild(group, position));
+                break;
         }
         if (intent != null)
             startActivity(intent);

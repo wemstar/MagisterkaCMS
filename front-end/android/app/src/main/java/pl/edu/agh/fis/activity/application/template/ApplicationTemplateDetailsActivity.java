@@ -1,5 +1,6 @@
 package pl.edu.agh.fis.activity.application.template;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -19,9 +20,13 @@ import org.androidannotations.rest.spring.annotations.RestService;
 import java.util.ArrayList;
 
 import pl.edu.agh.fis.R;
+import pl.edu.agh.fis.activity.action.CreateActionActivity;
+import pl.edu.agh.fis.activity.action.CreateActionActivity_;
+import pl.edu.agh.fis.adapter.list.action.ActionsAdapter;
 import pl.edu.agh.fis.adapter.list.application.template.ApplicationTemplateDetailsAdapter;
 import pl.edu.agh.fis.builder.dto.application.template.ApplicationTemplateDTOBuilder;
 import pl.edu.agh.fis.builder.dto.application.template.TemplateFieldsDTOBuilder;
+import pl.edu.agh.fis.dto.activity.ActivityDTO;
 import pl.edu.agh.fis.dto.application.template.ApplicationTemplateDTO;
 import pl.edu.agh.fis.dto.application.template.FieldTypeDTO;
 import pl.edu.agh.fis.dto.application.template.TemplateFieldsDTO;
@@ -31,7 +36,7 @@ import pl.edu.agh.fis.rest.application.tempalte.ApplicationTemplateClient;
  * Created by wemstar on 2016-06-07.
  */
 @EActivity(R.layout.activity_create_template)
-@OptionsMenu(R.menu.save_only_menu)
+@OptionsMenu(R.menu.save_add_menu)
 public class ApplicationTemplateDetailsActivity extends AppCompatActivity {
 
     public static final String TEMPLATE_INTENT = "DOCUMENT_INTENT";
@@ -44,18 +49,26 @@ public class ApplicationTemplateDetailsActivity extends AppCompatActivity {
     @Bean
     ApplicationTemplateDetailsAdapter adapter;
 
+    @Bean
+    ActionsAdapter actionsAdapter;
+
     @ViewById
     EditText templateName;
 
     @ViewById(R.id.listView)
     ListView listView;
 
+    @ViewById
+    ListView commentList;
+
     @AfterViews
     void initTable() {
         ApplicationTemplateDTO template = (ApplicationTemplateDTO) getIntent().getSerializableExtra(TEMPLATE_INTENT);
         if (template == null) {
-            template = ApplicationTemplateDTOBuilder.anApplicationTemplateDTO().fields(new ArrayList<TemplateFieldsDTO>()).build();
+            template = ApplicationTemplateDTOBuilder.anApplicationTemplateDTO().fields(new ArrayList<TemplateFieldsDTO>()).activities(new ArrayList<ActivityDTO>()).build();
         }
+        actionsAdapter.setActions(template.activities);
+        commentList.setAdapter(actionsAdapter);
         this.template = template;
         adapter.setTemplate(template);
         listView.setAdapter(adapter);
@@ -63,8 +76,8 @@ public class ApplicationTemplateDetailsActivity extends AppCompatActivity {
 
     @Click(R.id.floatingButton)
     void updateBookmarksClicked() {
-        template.fields.add(TemplateFieldsDTOBuilder.aTemplateFieldsDTO().type(FieldTypeDTO.STRING_TYPE).build());
-        adapter.notifyDataSetChanged();
+        Intent intent = new Intent(this, CreateActionActivity_.class);
+        startActivityForResult(intent, 1);
     }
 
     @ItemLongClick(R.id.listView)
@@ -79,6 +92,12 @@ public class ApplicationTemplateDetailsActivity extends AppCompatActivity {
         finish();
     }
 
+    @OptionsItem(R.id.action_add_item)
+    void actionAddItem() {
+        template.fields.add(TemplateFieldsDTOBuilder.aTemplateFieldsDTO().type(FieldTypeDTO.STRING_TYPE).build());
+        adapter.notifyDataSetChanged();
+    }
+
     @FocusChange(R.id.templateName)
     void focusChangedOnTemplateName(EditText editText) {
         template.title = editText.getText().toString();
@@ -90,6 +109,17 @@ public class ApplicationTemplateDetailsActivity extends AppCompatActivity {
             templateClient.updateTemplate(template.id, template);
         } else {
             templateClient.createTemplate(template);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                template.activities.add((ActivityDTO) data.getSerializableExtra(CreateActionActivity.ACTION_INTENT));
+                actionsAdapter.notifyDataSetChanged();
+            }
         }
     }
 }

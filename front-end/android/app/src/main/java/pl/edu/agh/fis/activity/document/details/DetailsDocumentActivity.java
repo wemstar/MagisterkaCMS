@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
@@ -20,16 +21,20 @@ import org.androidannotations.rest.spring.annotations.RestService;
 import java.util.ArrayList;
 
 import pl.edu.agh.fis.R;
+import pl.edu.agh.fis.activity.action.CreateActionActivity;
+import pl.edu.agh.fis.activity.action.CreateActionActivity_;
 import pl.edu.agh.fis.activity.document.chapter.list.ChapterListActivity;
 import pl.edu.agh.fis.activity.document.chapter.list.ChapterListActivity_;
+import pl.edu.agh.fis.adapter.list.action.ActionsAdapter;
 import pl.edu.agh.fis.adapter.list.document.element.DocumentElementAdapter;
 import pl.edu.agh.fis.builder.dto.document.DocumentDTOBuilder;
+import pl.edu.agh.fis.dto.activity.ActivityDTO;
 import pl.edu.agh.fis.dto.document.ChapterDTO;
 import pl.edu.agh.fis.dto.document.DocumentDTO;
 import pl.edu.agh.fis.rest.document.DocumentClient;
 
 @EActivity(R.layout.activity_expandable_list_floating_button)
-@OptionsMenu(R.menu.save_only_menu)
+@OptionsMenu(R.menu.save_add_menu)
 public class DetailsDocumentActivity extends AppCompatActivity {
 
     public static final String DOCUMENT_DETAILS_INTENT = "DOCUMENT_DETAILS_INTENT";
@@ -45,6 +50,12 @@ public class DetailsDocumentActivity extends AppCompatActivity {
     @Bean
     DocumentElementAdapter adapter;
 
+    @ViewById
+    ListView actionListView;
+
+    @Bean
+    ActionsAdapter actionsAdapter;
+
     @RestService
     DocumentClient documentClient;
 
@@ -54,8 +65,10 @@ public class DetailsDocumentActivity extends AppCompatActivity {
             document = (DocumentDTO) getIntent().getSerializableExtra(DOCUMENT_DETAILS_INTENT);
             documentTitle.setText(document.title);
         } else {
-            document = DocumentDTOBuilder.aDocumentDTO().chapters(new ArrayList<ChapterDTO>()).build();
+            document = DocumentDTOBuilder.aDocumentDTO().chapters(new ArrayList<ChapterDTO>()).activities(new ArrayList<ActivityDTO>()).build();
         }
+        actionsAdapter.setActions(document.activities);
+        actionListView.setAdapter(actionsAdapter);
         adapter.setDocument(document);
         documentContent.setAdapter(adapter);
     }
@@ -67,9 +80,8 @@ public class DetailsDocumentActivity extends AppCompatActivity {
 
     @Click(R.id.floatingButton)
     void addChapter() {
-        document.title = documentTitle.getText().toString();
-        createChapter();
-        adapter.notifyDataSetChanged();
+        Intent intent = new Intent(this, CreateActionActivity_.class);
+        startActivityForResult(intent, 2);
     }
 
     @OptionsItem(R.id.action_save)
@@ -77,6 +89,13 @@ public class DetailsDocumentActivity extends AppCompatActivity {
         document.title = documentTitle.getText().toString();
         sendDocument();
         finish();
+    }
+
+    @OptionsItem(R.id.action_add_item)
+    void addItem() {
+        document.title = documentTitle.getText().toString();
+        createChapter();
+        adapter.notifyDataSetChanged();
     }
 
     @Background
@@ -102,6 +121,11 @@ public class DetailsDocumentActivity extends AppCompatActivity {
                 this.document = (DocumentDTO) data.getSerializableExtra(ChapterListActivity.DOCUMENT_INTENT);
                 adapter.setDocument(document);
                 adapter.notifyDataSetChanged();
+            }
+        } else if (requestCode == 2) {
+            if (resultCode == RESULT_OK) {
+                document.activities.add((ActivityDTO) data.getSerializableExtra(CreateActionActivity.ACTION_INTENT));
+                actionsAdapter.notifyDataSetChanged();
             }
         }
     }

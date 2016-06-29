@@ -3,6 +3,7 @@ package pl.edu.agh.fis.builder.dto.document;
 import java.util.Date;
 import java.util.List;
 
+import pl.edu.agh.fis.dto.activity.ActivityDTO;
 import pl.edu.agh.fis.dto.document.ChapterDTO;
 import pl.edu.agh.fis.dto.document.DocumentDTO;
 
@@ -15,6 +16,7 @@ public class DocumentDTOBuilder {
     private Date date;
     private Long author;
     private List<ChapterDTO> chapters;
+    private List<ActivityDTO> activities;
 
     private DocumentDTOBuilder() {
     }
@@ -48,6 +50,11 @@ public class DocumentDTOBuilder {
         return this;
     }
 
+    public DocumentDTOBuilder activities(List<ActivityDTO> activities) {
+        this.activities = activities;
+        return this;
+    }
+
 
     public DocumentDTO build() {
         DocumentDTO documentDTO = new DocumentDTO();
@@ -56,6 +63,7 @@ public class DocumentDTOBuilder {
         documentDTO.date = date;
         documentDTO.author = author;
         documentDTO.chapters = chapters;
+        documentDTO.activities = activities;
         return documentDTO;
     }
 }

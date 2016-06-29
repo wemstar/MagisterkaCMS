@@ -7,7 +7,15 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
         android:id="@+id/view">
+
+        <EditText
+            android:id="@+id/templateName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/prompt_field_name" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -30,20 +38,19 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="438dp"
+        android:layout_height="230dp"
         android:descendantFocusability="afterDescendants"
         android:focusable="false"
-        android:layout_gravity="center"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/templateName"></ListView>
+        android:layout_below="@+id/view"/>
 
-    <EditText
-        android:id="@+id/templateName"
+    <ListView
+        android:id="@+id/commentList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/prompt_field_name"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_height="230dp"
+        android:descendantFocusability="afterDescendants"
+        android:focusable="false"
+        android:layout_below="@+id/listView" />
+
+
 
 </RelativeLayout>

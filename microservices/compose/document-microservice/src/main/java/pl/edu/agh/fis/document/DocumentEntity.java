@@ -1,5 +1,7 @@
 package pl.edu.agh.fis.document;
 
+import pl.edu.agh.fis.activity.ActivityEntity;
+
 import java.util.Date;
 import java.util.List;
 
@@ -13,4 +15,5 @@ public class DocumentEntity {
     public Date date;
     public Long author;
     public List<ChapterEntity> chapters;
+    public List<ActivityEntity> activities;
 }

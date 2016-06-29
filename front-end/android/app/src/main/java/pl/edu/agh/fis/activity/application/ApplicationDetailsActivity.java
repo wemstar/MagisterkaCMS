@@ -62,7 +62,7 @@ public class ApplicationDetailsActivity extends AppCompatActivity {
             applicationDTO.activities = new ArrayList<>();
         }
         adapterFields.setApplication(applicationDTO);
-        adapterActions.setApplication(applicationDTO.activities);
+        adapterActions.setActions(applicationDTO.activities);
         applicationFiledListView.setAdapter(adapterFields);
         applicationActionsListView.setAdapter(adapterActions);
         applicationName.setText(applicationDTO.title);
@@ -70,7 +70,7 @@ public class ApplicationDetailsActivity extends AppCompatActivity {
 
     @OptionsItem(R.id.action_save)
     void actionSaveClicked() {
-        applicationDTO.activities = adapterActions.getApplication();
+        applicationDTO.activities = adapterActions.getActions();
         saveApplication();
         finish();
     }
@@ -78,7 +78,6 @@ public class ApplicationDetailsActivity extends AppCompatActivity {
     @Click(R.id.floatingButton)
     void createAction() {
         Intent intent = new Intent(this, CreateActionActivity_.class);
-        //intent.putExtra(CreateActionActivity.ACTION_INTENT, document);
         startActivityForResult(intent, 1);
     }
 
