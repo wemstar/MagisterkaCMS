@@ -2,8 +2,11 @@ package pl.edu.agh.fis;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
+import org.springframework.cloud.netflix.turbine.EnableTurbine;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
@@ -18,6 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 @EnableFeignClients
 @RestController
+@EnableCircuitBreaker
+@EnableHystrixDashboard
+@EnableTurbine
 public class EdgeServerApplication {
 
 	public static void main(String[] args) {

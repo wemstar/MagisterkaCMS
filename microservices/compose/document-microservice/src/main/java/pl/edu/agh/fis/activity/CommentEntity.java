@@ -6,6 +6,13 @@ package pl.edu.agh.fis.activity;
 public class CommentEntity {
 
     public String id;
-    public String autorId;
+    public Long autorId;
     public String content;
+
+    public CommentEntity(){}
+
+    public CommentEntity(Long autorId, String content){
+        this.autorId = autorId;
+        this.content = content;
+    }
 }

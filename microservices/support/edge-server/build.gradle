@@ -8,6 +8,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
 	compile('org.springframework.session:spring-session:1.2.0.RELEASE')
+	compile('org.springframework.cloud:spring-cloud-starter-hystrix-dashboard')
+	compile('org.springframework.cloud:spring-cloud-starter-turbine')
 	compile group: 'org.springframework.session', name: 'spring-session-jdbc', version: '1.2.0.RELEASE'
 	compile project(":commons/utils-common")
 	compile('com.h2database:h2')

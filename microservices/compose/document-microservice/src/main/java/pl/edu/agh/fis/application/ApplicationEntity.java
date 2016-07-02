@@ -15,4 +15,5 @@ public class ApplicationEntity {
     public String title;
     public List<FieldEntity> fields;
     public List<ActivityEntity> activities;
+    public Long author;
 }

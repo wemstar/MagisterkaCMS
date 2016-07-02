@@ -6,8 +6,9 @@ package pl.edu.agh.fis.activity;
 public class ActivityEntity {
 
     public String id;
-    public String userId;
+    public Long userId;
     public ActionType actionType;
     public CommentEntity comment;
     public ActionEntity action;
+
 }

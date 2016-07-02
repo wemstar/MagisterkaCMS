@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.savedrequest.NullRequestCache;
@@ -31,22 +32,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         builder.authenticationProvider(customAuthenticationProvider);
     }
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-                .requestCache()
-                .requestCache(new NullRequestCache())
-                .and()
-                .httpBasic()
-                .and()
-                .csrf().disable();
+        http.authorizeRequests().anyRequest().authenticated()
+                .and().requestCache().requestCache(new NullRequestCache())
+                .and().httpBasic()
+                .and().csrf().disable();
     }
 
     @Bean
     public HttpSessionStrategy httpSessionStrategy() {
         return new HeaderHttpSessionStrategy();
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/hystrix.stream")
+//                .and().ignoring().antMatchers("/hystrix")
+//                .and().ignoring().antMatchers("/turbine.stream")
+//                .and().ignoring().antMatchers("/hystrix/**")
+//                .and().ignoring().antMatchers("/webjars/**")
+                .and().ignoring().antMatchers("/current/user/name");
     }
 }

@@ -1,5 +1,6 @@
 package pl.edu.agh.fis.auth.provider;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -46,7 +47,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 
-    private boolean authenticatedAgainstThirdPartySystem(String name,String password) {
+    public boolean authenticatedAgainstThirdPartySystem(String name,String password) {
         UserDTO userDTO = userCore.getUserByLogin(name);
         return shaPasswordEncoder.isPasswordValid(userDTO.getPassword(),password,name);
     }

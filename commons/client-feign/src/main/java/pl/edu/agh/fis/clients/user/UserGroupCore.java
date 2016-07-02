@@ -16,12 +16,12 @@ import pl.edu.agh.fis.dto.user.UserGroupDTO;
 @FeignClient("user-micro-service")
 public interface UserGroupCore {
 
-    @RequestMapping(method = RequestMethod.GET, path = "/group")
+    @RequestMapping(method = RequestMethod.GET, value = "/group")
     Resource<UserGroupDTO> getUsers();
 
-    @RequestMapping(method = RequestMethod.GET, path = "/group/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/group/{id}")
     Resource<UserGroupDTO> getUser(@PathVariable Long id);
 
-    @RequestMapping(method = RequestMethod.POST,path = "/group", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST,value = "/group", consumes = MediaType.APPLICATION_JSON_VALUE)
     Resource<UserGroupDTO> createUser(@RequestBody UserDTO user);
 }

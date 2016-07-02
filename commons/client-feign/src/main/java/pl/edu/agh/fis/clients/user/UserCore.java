@@ -11,15 +11,15 @@ import pl.edu.agh.fis.dto.user.UserDTO;
  */
 @FeignClient("user-micro-service")
 public interface UserCore {
-    @RequestMapping(method = RequestMethod.GET, path = "/user")
+    @RequestMapping(method = RequestMethod.GET, value = "/user")
     Resource<UserDTO> getUsers();
 
-    @RequestMapping(method = RequestMethod.GET, path = "/user/search/findByLogin",params = "login")
+    @RequestMapping(method = RequestMethod.GET, value = "/user/search/findByLogin",params = "login")
     UserDTO getUserByLogin(@RequestParam("login") String login);
 
-    @RequestMapping(method = RequestMethod.GET, path = "/user/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/user/{id}")
     Resource<UserDTO> getUser(@PathVariable("id") Long id);
 
-    @RequestMapping(method = RequestMethod.POST,path = "/user", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST,value = "/user", consumes = MediaType.APPLICATION_JSON_VALUE)
     Resource<UserDTO> createUser(@RequestBody UserDTO user);
 }

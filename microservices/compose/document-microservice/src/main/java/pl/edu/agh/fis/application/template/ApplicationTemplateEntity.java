@@ -12,4 +12,5 @@ public class ApplicationTemplateEntity {
     public String title;
     public List<TemplateFieldsEntity> fields;
     public List<ActivityEntity> activities;
+    public Long author;
 }
