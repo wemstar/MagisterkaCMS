@@ -55,6 +55,8 @@
         <activity
             android:name=".activity.application.ApplicationDetailsActivity_"
             android:label="@string/title_activity_create_application" />
+        <activity android:name=".activity.verification.VerificationActivity_" />
+        <activity android:name=".activity.user.group.UserGroupListActivity_" />
     </application>
 
 </manifest>

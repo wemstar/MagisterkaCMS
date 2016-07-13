@@ -19,7 +19,7 @@ public class UserCommonUtils {
 
 
     public Long getCurrentUserId() {
-        return getCurrentUser().getId();
+        return getCurrentUser().id;
     }
 
     public UserDTO getCurrentUser() {

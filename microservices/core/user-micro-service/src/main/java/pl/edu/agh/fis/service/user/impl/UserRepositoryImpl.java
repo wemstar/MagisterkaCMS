@@ -2,9 +2,13 @@ package pl.edu.agh.fis.service.user.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import pl.edu.agh.fis.clients.edge.SessionClients;
 import pl.edu.agh.fis.entity.user.UserEntity;
 import pl.edu.agh.fis.service.user.UserRepository;
 
@@ -21,6 +25,9 @@ public class UserRepositoryImpl {
     @Autowired
     private ShaPasswordEncoder shaPasswordEncoder;
 
+    @Autowired
+    SessionClients sessionClients;
+
     @RequestMapping(method = RequestMethod.POST, value = "/user")
     @ResponseStatus(HttpStatus.CREATED)
     public void createUser(@RequestBody UserEntity user) {
@@ -36,5 +43,12 @@ public class UserRepositoryImpl {
         user.setId(repoUser.getId());
         user.setPassword(shaPasswordEncoder.encodePassword(user.getPassword(),user.getLogin()));
         userRepository.save(user);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/user/current")
+    public ResponseEntity<?> getCurrentUser() {
+        String login = sessionClients.getCurrentUser();
+        UserEntity resource = userRepository.findByLogin(login);
+        return ResponseEntity.ok(new Resource<>(resource));
     }
 }

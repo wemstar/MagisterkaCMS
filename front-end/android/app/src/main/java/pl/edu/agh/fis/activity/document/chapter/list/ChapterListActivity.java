@@ -1,6 +1,5 @@
 package pl.edu.agh.fis.activity.document.chapter.list;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
@@ -9,7 +8,6 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.ItemLongClick;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
@@ -20,7 +18,6 @@ import pl.edu.agh.fis.activity.document.paragraph.list.ParagraphListActivity;
 import pl.edu.agh.fis.activity.document.paragraph.list.ParagraphListActivity_;
 import pl.edu.agh.fis.adapter.list.chapter.ChapterListAdapter;
 import pl.edu.agh.fis.builder.dto.document.ChapterDTOBuilder;
-import pl.edu.agh.fis.commons.CommonsAlert;
 import pl.edu.agh.fis.dto.document.ChapterDTO;
 import pl.edu.agh.fis.dto.document.DocumentDTO;
 

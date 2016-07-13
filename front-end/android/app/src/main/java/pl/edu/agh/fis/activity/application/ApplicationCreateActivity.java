@@ -89,6 +89,8 @@ public class ApplicationCreateActivity extends AppCompatActivity {
                 .title(applicationTemplateDTO.title)
                 .templateId(applicationTemplateDTO.id)
                 .activities(new ArrayList<ActivityDTO>())
+                .verificationSteps(applicationTemplateDTO.templateVerificationSteps)
+                .allowedUserGroups(new ArrayList<Long>())
                 .build();
 
     }

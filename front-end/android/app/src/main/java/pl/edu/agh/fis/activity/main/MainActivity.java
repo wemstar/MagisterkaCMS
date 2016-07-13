@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
@@ -23,6 +24,7 @@ import pl.edu.agh.fis.R;
 import pl.edu.agh.fis.activity.application.template.ApplicationTemplateDetailsActivity_;
 import pl.edu.agh.fis.activity.application.template.ApplicationTemplateListActivity_;
 import pl.edu.agh.fis.activity.document.details.DetailsDocumentActivity_;
+import pl.edu.agh.fis.utils.UserContext;
 
 @EActivity(R.layout.activity_main)
 @OptionsMenu(R.menu.main)
@@ -42,6 +44,9 @@ public class MainActivity extends AppCompatActivity
     @ViewById
     Toolbar toolbar;
 
+    @Bean
+    UserContext userContext;
+
     @AfterViews
     void initViews() {
         setSupportActionBar(toolbar);
@@ -49,7 +54,7 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
+        userContext.reloadUser();
         navigationView.setNavigationItemSelectedListener(this);
     }
 

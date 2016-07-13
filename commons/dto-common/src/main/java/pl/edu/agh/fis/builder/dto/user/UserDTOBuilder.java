@@ -6,7 +6,7 @@ import pl.edu.agh.fis.dto.user.UserDTO;
  * Created by wemstar on 2016-02-27.
  */
 public class UserDTOBuilder {
-    private Long id;
+    private Integer id;
     private String email;
     private String login;
     private String password;
@@ -18,7 +18,7 @@ public class UserDTOBuilder {
         return new UserDTOBuilder();
     }
 
-    public UserDTOBuilder id(Long id) {
+    public UserDTOBuilder id(Integer id) {
         this.id = id;
         return this;
     }
@@ -44,10 +44,10 @@ public class UserDTOBuilder {
 
     public UserDTO build() {
         UserDTO userDTO = new UserDTO();
-        userDTO.setId(id);
-        userDTO.setEmail(email);
-        userDTO.setLogin(login);
-        userDTO.setPassword(password);
+        //userDTO.id = id;
+        userDTO.email = email;
+        userDTO.login = login;
+        userDTO.password = password;
         return userDTO;
     }
 }

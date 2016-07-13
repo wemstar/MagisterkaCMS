@@ -8,7 +8,6 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.ItemLongClick;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
@@ -23,6 +22,7 @@ import pl.edu.agh.fis.adapter.list.paragraph.ParagraphListAdapter;
 import pl.edu.agh.fis.builder.dto.document.ParagraphDTOBuilder;
 import pl.edu.agh.fis.dto.document.ChapterDTO;
 import pl.edu.agh.fis.dto.document.ParagraphDTO;
+
 
 /**
  * Created by wemstar on 2016-05-24.

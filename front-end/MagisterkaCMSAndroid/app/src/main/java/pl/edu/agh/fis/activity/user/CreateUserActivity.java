@@ -1,4 +1,4 @@
-package pl.edu.agh.fis.activity.user;
+package pl.edu.agh.fis.model.activity.user;
 
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;

@@ -49,6 +49,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     public boolean authenticatedAgainstThirdPartySystem(String name,String password) {
         UserDTO userDTO = userCore.getUserByLogin(name);
-        return shaPasswordEncoder.isPasswordValid(userDTO.getPassword(),password,name);
+        return shaPasswordEncoder.isPasswordValid(userDTO.password,password,name);
     }
 }

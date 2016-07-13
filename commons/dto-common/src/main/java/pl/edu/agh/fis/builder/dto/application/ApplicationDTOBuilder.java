@@ -5,6 +5,7 @@ import java.util.List;
 import pl.edu.agh.fis.dto.activity.ActivityDTO;
 import pl.edu.agh.fis.dto.application.ApplicationDTO;
 import pl.edu.agh.fis.dto.application.FieldDTO;
+import pl.edu.agh.fis.dto.verification.VerificationStepDTO;
 
 /**
  * Created by wemstar on 2016-06-14.
@@ -16,6 +17,8 @@ public class ApplicationDTOBuilder {
     private String templateId;
     private List<FieldDTO> fields;
     private List<ActivityDTO> activities;
+    private List<VerificationStepDTO> verificationSteps;
+    private List<Long> allowedUserGroups;
 
     private ApplicationDTOBuilder() {
     }
@@ -49,6 +52,16 @@ public class ApplicationDTOBuilder {
         return this;
     }
 
+    public ApplicationDTOBuilder verificationSteps(List<VerificationStepDTO> verificationSteps) {
+        this.verificationSteps = verificationSteps;
+        return this;
+    }
+
+    public ApplicationDTOBuilder allowedUserGroups(List<Long> allowedUserGroups) {
+        this.allowedUserGroups = allowedUserGroups;
+        return this;
+    }
+
 
     public ApplicationDTO build() {
         ApplicationDTO templateDTO = new ApplicationDTO();
@@ -57,6 +70,8 @@ public class ApplicationDTOBuilder {
         templateDTO.templateId = templateId;
         templateDTO.fields = fields;
         templateDTO.activities = activities;
+        templateDTO.allowedUserGroups = allowedUserGroups;
+        templateDTO.verificationSteps = verificationSteps;
         return templateDTO;
     }
 }

@@ -1,4 +1,4 @@
-package pl.edu.agh.fis.activity;
+package pl.edu.agh.fis.model.activity;
 
 /**
  * Created by wemstar on 2016-06-20.

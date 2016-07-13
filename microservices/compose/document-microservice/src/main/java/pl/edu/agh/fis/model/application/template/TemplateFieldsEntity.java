@@ -1,4 +1,4 @@
-package pl.edu.agh.fis.application.template;
+package pl.edu.agh.fis.model.application.template;
 
 /**
  * Created by wemstar on 2016-04-13.

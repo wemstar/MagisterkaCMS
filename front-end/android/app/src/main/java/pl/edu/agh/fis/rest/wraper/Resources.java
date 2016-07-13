@@ -17,11 +17,13 @@ package pl.edu.agh.fis.rest.wraper;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import org.springframework.util.Assert;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * General helper to easily create a wrapper for a collection of entities.
@@ -29,7 +31,7 @@ import java.util.*;
  * @author Oliver Gierke
  */
 @JsonIgnoreProperties({"_links"})
- public class Resources<T> extends ResourceSupport implements Iterable<T> {
+public class Resources<T> extends ResourceSupport implements Iterable<T> {
 
  	@JsonProperty ("_embedded")
  	private final Map<String,Collection<T>> content;

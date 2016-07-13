@@ -18,10 +18,13 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import pl.edu.agh.fis.R;
 import pl.edu.agh.fis.activity.action.CreateActionActivity;
 import pl.edu.agh.fis.activity.action.CreateActionActivity_;
+import pl.edu.agh.fis.activity.verification.VerificationActivity;
+import pl.edu.agh.fis.activity.verification.VerificationActivity_;
 import pl.edu.agh.fis.adapter.list.action.ActionsAdapter;
 import pl.edu.agh.fis.adapter.list.application.template.ApplicationTemplateDetailsAdapter;
 import pl.edu.agh.fis.builder.dto.application.template.ApplicationTemplateDTOBuilder;
@@ -30,13 +33,14 @@ import pl.edu.agh.fis.dto.activity.ActivityDTO;
 import pl.edu.agh.fis.dto.application.template.ApplicationTemplateDTO;
 import pl.edu.agh.fis.dto.application.template.FieldTypeDTO;
 import pl.edu.agh.fis.dto.application.template.TemplateFieldsDTO;
+import pl.edu.agh.fis.dto.verification.VerificationStepDTO;
 import pl.edu.agh.fis.rest.application.tempalte.ApplicationTemplateClient;
 
 /**
  * Created by wemstar on 2016-06-07.
  */
 @EActivity(R.layout.activity_create_template)
-@OptionsMenu(R.menu.save_add_menu)
+@OptionsMenu(R.menu.create_template_menu)
 public class ApplicationTemplateDetailsActivity extends AppCompatActivity {
 
     public static final String TEMPLATE_INTENT = "DOCUMENT_INTENT";
@@ -65,7 +69,13 @@ public class ApplicationTemplateDetailsActivity extends AppCompatActivity {
     void initTable() {
         ApplicationTemplateDTO template = (ApplicationTemplateDTO) getIntent().getSerializableExtra(TEMPLATE_INTENT);
         if (template == null) {
-            template = ApplicationTemplateDTOBuilder.anApplicationTemplateDTO().fields(new ArrayList<TemplateFieldsDTO>()).activities(new ArrayList<ActivityDTO>()).build();
+            template = ApplicationTemplateDTOBuilder.anApplicationTemplateDTO()
+                    .fields(new ArrayList<TemplateFieldsDTO>())
+                    .activities(new ArrayList<ActivityDTO>())
+                    .verificationSteps(new ArrayList<VerificationStepDTO>())
+                    .templateVerificationSteps(new ArrayList<VerificationStepDTO>())
+                    .allowedUserGroups(new ArrayList<Long>())
+                    .build();
         }
         actionsAdapter.setActions(template.activities);
         commentList.setAdapter(actionsAdapter);
@@ -98,6 +108,22 @@ public class ApplicationTemplateDetailsActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+    @OptionsItem(R.id.action_template_verification_steps)
+    void templateVerificationSteps() {
+        Intent intent = new Intent(this, VerificationActivity_.class);
+        intent.putExtra(VerificationActivity.VERIFICATION_STEPS_INTENT, new ArrayList<>(template.templateVerificationSteps));
+        intent.putExtra(VerificationActivity.VERIFICATION_ELEMENT_DI, template.id);
+        startActivityForResult(intent, 2);
+    }
+
+    @OptionsItem(R.id.action_verification_steps)
+    void verificationSteps() {
+        Intent intent = new Intent(this, VerificationActivity_.class);
+        intent.putExtra(VerificationActivity.VERIFICATION_STEPS_INTENT, new ArrayList<>(template.verificationSteps));
+        intent.putExtra(VerificationActivity.VERIFICATION_ELEMENT_DI, template.id);
+        startActivityForResult(intent, 3);
+    }
+
     @FocusChange(R.id.templateName)
     void focusChangedOnTemplateName(EditText editText) {
         template.title = editText.getText().toString();
@@ -119,6 +145,14 @@ public class ApplicationTemplateDetailsActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 template.activities.add((ActivityDTO) data.getSerializableExtra(CreateActionActivity.ACTION_INTENT));
                 actionsAdapter.notifyDataSetChanged();
+            }
+        } else if (requestCode == 2) {
+            if (resultCode == RESULT_OK) {
+                template.templateVerificationSteps = (List<VerificationStepDTO>) data.getSerializableExtra(VerificationActivity.VERIFICATION_STEPS_INTENT);
+            }
+        } else if (requestCode == 3) {
+            if (resultCode == RESULT_OK) {
+                template.verificationSteps = (List<VerificationStepDTO>) data.getSerializableExtra(VerificationActivity.VERIFICATION_STEPS_INTENT);
             }
         }
     }

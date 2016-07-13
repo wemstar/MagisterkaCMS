@@ -16,21 +16,25 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import pl.edu.agh.fis.R;
 import pl.edu.agh.fis.activity.action.CreateActionActivity;
 import pl.edu.agh.fis.activity.action.CreateActionActivity_;
+import pl.edu.agh.fis.activity.verification.VerificationActivity;
+import pl.edu.agh.fis.activity.verification.VerificationActivity_;
 import pl.edu.agh.fis.adapter.list.action.ActionsAdapter;
 import pl.edu.agh.fis.adapter.list.application.ApplicationFieldsAdapter;
 import pl.edu.agh.fis.dto.activity.ActivityDTO;
 import pl.edu.agh.fis.dto.application.ApplicationDTO;
+import pl.edu.agh.fis.dto.verification.VerificationStepDTO;
 import pl.edu.agh.fis.rest.application.ApplicationClient;
 
 /**
  * Created by wemstar on 2016-06-22.
  */
 @EActivity(R.layout.activity_details_application)
-@OptionsMenu(R.menu.save_only_menu)
+@OptionsMenu(R.menu.save_verification_menu)
 public class ApplicationDetailsActivity extends AppCompatActivity {
     public static final String APPLICATION_DETAILS = "APPLICATION_DETAILS";
 
@@ -75,6 +79,14 @@ public class ApplicationDetailsActivity extends AppCompatActivity {
         finish();
     }
 
+    @OptionsItem(R.id.action_verification_steps)
+    void verificationSteps() {
+        Intent intent = new Intent(this, VerificationActivity_.class);
+        intent.putExtra(VerificationActivity.VERIFICATION_STEPS_INTENT, new ArrayList<>(applicationDTO.verificationSteps));
+        intent.putExtra(VerificationActivity.VERIFICATION_ELEMENT_DI, applicationDTO.id);
+        startActivityForResult(intent, 2);
+    }
+
     @Click(R.id.floatingButton)
     void createAction() {
         Intent intent = new Intent(this, CreateActionActivity_.class);
@@ -98,6 +110,10 @@ public class ApplicationDetailsActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 applicationDTO.activities.add((ActivityDTO) data.getSerializableExtra(CreateActionActivity.ACTION_INTENT));
                 adapterActions.notifyDataSetChanged();
+            }
+        } else if (requestCode == 2) {
+            if (resultCode == RESULT_OK) {
+                applicationDTO.verificationSteps = (List<VerificationStepDTO>) data.getSerializableExtra(VerificationActivity.VERIFICATION_STEPS_INTENT);
             }
         }
     }

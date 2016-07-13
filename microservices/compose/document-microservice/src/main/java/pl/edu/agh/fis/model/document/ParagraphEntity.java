@@ -1,4 +1,4 @@
-package pl.edu.agh.fis.document;
+package pl.edu.agh.fis.model.document;
 
 import java.util.List;
 

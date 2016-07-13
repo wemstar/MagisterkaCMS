@@ -12,25 +12,28 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.FocusChange;
-import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import pl.edu.agh.fis.R;
 import pl.edu.agh.fis.activity.action.CreateActionActivity;
 import pl.edu.agh.fis.activity.action.CreateActionActivity_;
 import pl.edu.agh.fis.activity.document.chapter.list.ChapterListActivity;
 import pl.edu.agh.fis.activity.document.chapter.list.ChapterListActivity_;
+import pl.edu.agh.fis.activity.verification.VerificationActivity;
+import pl.edu.agh.fis.activity.verification.VerificationActivity_;
 import pl.edu.agh.fis.adapter.list.action.ActionsAdapter;
 import pl.edu.agh.fis.adapter.list.document.element.DocumentElementAdapter;
 import pl.edu.agh.fis.builder.dto.document.DocumentDTOBuilder;
 import pl.edu.agh.fis.dto.activity.ActivityDTO;
 import pl.edu.agh.fis.dto.document.ChapterDTO;
 import pl.edu.agh.fis.dto.document.DocumentDTO;
+import pl.edu.agh.fis.dto.verification.VerificationStepDTO;
 import pl.edu.agh.fis.rest.document.DocumentClient;
 
 @EActivity(R.layout.activity_expandable_list_floating_button)
@@ -65,7 +68,12 @@ public class DetailsDocumentActivity extends AppCompatActivity {
             document = (DocumentDTO) getIntent().getSerializableExtra(DOCUMENT_DETAILS_INTENT);
             documentTitle.setText(document.title);
         } else {
-            document = DocumentDTOBuilder.aDocumentDTO().chapters(new ArrayList<ChapterDTO>()).activities(new ArrayList<ActivityDTO>()).build();
+            document = DocumentDTOBuilder.aDocumentDTO()
+                    .chapters(new ArrayList<ChapterDTO>())
+                    .activities(new ArrayList<ActivityDTO>())
+                    .verificationSteps(new ArrayList<VerificationStepDTO>())
+                    .allowedUserGroups(new ArrayList<Long>())
+                    .build();
         }
         actionsAdapter.setActions(document.activities);
         actionListView.setAdapter(actionsAdapter);
@@ -98,6 +106,14 @@ public class DetailsDocumentActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+    @OptionsItem(R.id.action_verification_steps)
+    void verificationSteps() {
+        Intent intent = new Intent(this, VerificationActivity_.class);
+        intent.putExtra(VerificationActivity.VERIFICATION_STEPS_INTENT, new ArrayList<>(document.verificationSteps));
+        intent.putExtra(VerificationActivity.VERIFICATION_ELEMENT_DI, document.id);
+        startActivityForResult(intent, 3);
+    }
+
     @Background
     void sendDocument() {
         if(document.id == null || document.id.isEmpty())
@@ -126,6 +142,10 @@ public class DetailsDocumentActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 document.activities.add((ActivityDTO) data.getSerializableExtra(CreateActionActivity.ACTION_INTENT));
                 actionsAdapter.notifyDataSetChanged();
+            }
+        } else if (requestCode == 3) {
+            if (resultCode == RESULT_OK) {
+                document.verificationSteps = (List<VerificationStepDTO>) data.getSerializableExtra(VerificationActivity.VERIFICATION_STEPS_INTENT);
             }
         }
     }

@@ -2,6 +2,7 @@ package pl.edu.agh.fis.entity.user;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by wemstar on 2016-02-23.
@@ -21,6 +22,9 @@ public class UserEntity {
     private String login;
     @Column(name = "USER_PASSWORD")
     private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users")
+    private Set<UserGroupEntity> userGroups;
 
     public Long getId() {
         return id;
@@ -54,5 +58,11 @@ public class UserEntity {
         this.password = password;
     }
 
+    public Set<UserGroupEntity> getUserGroups() {
+        return userGroups;
+    }
 
+    public void setUserGroups(Set<UserGroupEntity> userGroups) {
+        this.userGroups = userGroups;
+    }
 }

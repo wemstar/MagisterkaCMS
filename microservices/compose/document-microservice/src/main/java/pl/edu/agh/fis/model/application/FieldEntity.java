@@ -1,6 +1,6 @@
-package pl.edu.agh.fis.application;
+package pl.edu.agh.fis.model.application;
 
-import pl.edu.agh.fis.application.template.FieldType;
+import pl.edu.agh.fis.model.application.template.FieldType;
 
 /**
  * Created by wemstar on 2016-06-06.

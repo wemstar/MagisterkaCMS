@@ -2,9 +2,9 @@ package pl.edu.agh.fis.rest.user;
 
 import org.androidannotations.rest.spring.annotations.Body;
 import org.androidannotations.rest.spring.annotations.Post;
-import org.androidannotations.rest.spring.annotations.Put;
 import org.androidannotations.rest.spring.annotations.Rest;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+
 import pl.edu.agh.fis.Constraints;
 import pl.edu.agh.fis.dto.user.UserDTO;
 

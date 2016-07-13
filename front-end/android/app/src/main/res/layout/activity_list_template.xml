@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:descendantFocusability="afterDescendants"
         android:focusable="false"
-        android:stackFromBottom="true"></ListView>
+        android:stackFromBottom="true"
+        android:choiceMode="multipleChoice"></ListView>
 
 
 </FrameLayout>

@@ -6,6 +6,7 @@ import java.util.List;
 import pl.edu.agh.fis.dto.activity.ActivityDTO;
 import pl.edu.agh.fis.dto.document.ChapterDTO;
 import pl.edu.agh.fis.dto.document.DocumentDTO;
+import pl.edu.agh.fis.dto.verification.VerificationStepDTO;
 
 /**
  * Created by wemstar on 2016-05-14.
@@ -17,6 +18,8 @@ public class DocumentDTOBuilder {
     private Long author;
     private List<ChapterDTO> chapters;
     private List<ActivityDTO> activities;
+    private List<VerificationStepDTO> verificationSteps;
+    private List<Long> allowedUserGroups;
 
     private DocumentDTOBuilder() {
     }
@@ -55,6 +58,16 @@ public class DocumentDTOBuilder {
         return this;
     }
 
+    public DocumentDTOBuilder verificationSteps(List<VerificationStepDTO> verificationSteps) {
+        this.verificationSteps = verificationSteps;
+        return this;
+    }
+
+    public DocumentDTOBuilder allowedUserGroups(List<Long> allowedUserGroups) {
+        this.allowedUserGroups = allowedUserGroups;
+        return this;
+    }
+
 
     public DocumentDTO build() {
         DocumentDTO documentDTO = new DocumentDTO();
@@ -64,6 +77,8 @@ public class DocumentDTOBuilder {
         documentDTO.author = author;
         documentDTO.chapters = chapters;
         documentDTO.activities = activities;
+        documentDTO.verificationSteps = verificationSteps;
+        documentDTO.allowedUserGroups = allowedUserGroups;
         return documentDTO;
     }
 }

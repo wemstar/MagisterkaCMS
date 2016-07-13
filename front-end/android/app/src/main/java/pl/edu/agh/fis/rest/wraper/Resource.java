@@ -15,8 +15,8 @@
  */
 package pl.edu.agh.fis.rest.wraper;
 
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.springframework.util.Assert;
 
@@ -27,9 +27,10 @@ import java.util.Arrays;
  *
  * @author Oliver Gierke
  */
+@JsonIgnoreProperties({"_links"})
  public class Resource<T> extends ResourceSupport {
 
-	@JsonUnwrapped
+	@JsonProperty("_embedded")
  	private final T content;
 
 	/**
