@@ -45,7 +45,7 @@ public class TestControllerMVC {
     @RequestMapping(path = "/user/create",method = RequestMethod.GET)
     public Resource<UserDTO> createUser() {
         UserDTO user = UserDTOBuilder.anUserDTO()
-                .id(1L)
+                .id(1)
                 .email("email")
                 .login("login1")
                 .password("pass2")

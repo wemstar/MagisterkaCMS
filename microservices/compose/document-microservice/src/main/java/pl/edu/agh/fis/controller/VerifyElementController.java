@@ -3,7 +3,7 @@ package pl.edu.agh.fis.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.edu.agh.fis.service.VerifyElementService;
+import pl.edu.agh.fis.services.VerifyElementService;
 import pl.edu.agh.fis.utils.ElementType;
 
 import java.util.List;
