@@ -20,26 +20,23 @@
 #  links:
 #    - elasticsearch
 discovery-server:
-  image: magisterka-cms/image-discovery-server
+  image: wemstar/magisterka-cms-image-discovery-server
   ports:
     - "8770:8080"
   expose:
     - "8080"
-#  links:
-#    - logstash
   external_links:
     - image-config-server:config-server
 edge-server:
-  image: magisterka-cms/image-edge-server
+  image: wemstar/magisterka-cms-image-edge-server
   ports:
     - "8769:8080"
   links:
-#    - logstash
     - discovery-server
   external_links:
     - image-config-server:config-server
 user-micro-service:
-  image: magisterka-cms/image-user-micro-service
+  image: wemstar/magisterka-cms-image-user-micro-service
   expose:
       - "8080"
   links:
@@ -49,7 +46,7 @@ user-micro-service:
   external_links:
     - image-config-server:config-server
 document-microservice:
-  image: magisterka-cms/image-document-microservice
+  image: wemstar/magisterka-cms-image-document-microservice
   expose:
       - "8080"
   links:

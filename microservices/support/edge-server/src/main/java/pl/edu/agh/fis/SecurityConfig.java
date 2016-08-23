@@ -49,10 +49,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/hystrix.stream")
-//                .and().ignoring().antMatchers("/hystrix")
-//                .and().ignoring().antMatchers("/turbine.stream")
-//                .and().ignoring().antMatchers("/hystrix/**")
-//                .and().ignoring().antMatchers("/webjars/**")
+                .and().ignoring().antMatchers("/hystrix")
+               .and().ignoring().antMatchers("/turbine.stream")
+               .and().ignoring().antMatchers("/hystrix/**")
+                .and().ignoring().antMatchers("/webjars/**")
                 .and().ignoring().antMatchers("/current/user/name");
     }
 }
