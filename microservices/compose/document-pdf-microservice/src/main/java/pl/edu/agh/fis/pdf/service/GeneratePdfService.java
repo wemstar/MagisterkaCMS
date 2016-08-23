@@ -25,7 +25,7 @@ public class GeneratePdfService {
 
     public byte[] generatePdf(String documentId) throws DocumentException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        DocumentDTO documentSource = documentClient.getDocument(documentId).getContent()
+        DocumentDTO documentSource = documentClient.getDocument(documentId).getContent();
         Document document = new Document(PageSize.LETTER, 0.75F, 0.75F, 0.75F, 0.75F);
         PdfWriter.getInstance(document, byteArrayOutputStream);  // Do this BEFORE document.open()
 
