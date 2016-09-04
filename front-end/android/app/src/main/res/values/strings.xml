@@ -142,6 +142,7 @@
     <string name="delete">Delete</string>
     <string name="action_verification_steps">Verifications</string>
     <string name="action_template_verification_steps">Template Verification</string>
+    <string name="action_export_pdf">Export</string>
 
     <string-array name="application_template_filed_type">
         <item>String</item>

@@ -6,13 +6,9 @@ jar {
 apply from: '../../../commons.gradle'
 dependencies {
 	compile('org.springframework.cloud:spring-cloud-starter-hystrix')
-	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
-	compile("org.springframework.boot:spring-boot-starter-data-rest")
 	compile('org.springframework.boot:spring-boot-starter-hateoas')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('com.jayway.jsonpath:json-path:2.1.0')
-	compile group: "de.flapdoodle.embed", name: "de.flapdoodle.embed.mongo", version: "1.50.1"
-	compile('cz.jirutka.spring:embedmongo-spring:1.3.1')
 	compile('com.itextpdf:itextpdf:5.5.9')
 }
 apply from: '../../../docker.gradle'

@@ -1,7 +1,11 @@
 package pl.edu.agh.fis.activity.document.details;
 
 import android.content.Intent;
+import android.os.Build;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Base64;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
@@ -17,9 +21,18 @@ import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.edu.agh.fis.Constraints;
 import pl.edu.agh.fis.R;
 import pl.edu.agh.fis.activity.action.CreateActionActivity;
 import pl.edu.agh.fis.activity.action.CreateActionActivity_;
@@ -35,9 +48,11 @@ import pl.edu.agh.fis.dto.document.ChapterDTO;
 import pl.edu.agh.fis.dto.document.DocumentDTO;
 import pl.edu.agh.fis.dto.verification.VerificationStepDTO;
 import pl.edu.agh.fis.rest.document.DocumentClient;
+import pl.edu.agh.fis.rest.document.DocumentPDFClient;
+import pl.edu.agh.fis.utils.TokenKeeper;
 
 @EActivity(R.layout.activity_expandable_list_floating_button)
-@OptionsMenu(R.menu.save_add_menu)
+@OptionsMenu(R.menu.save_add_expot_menu)
 public class DetailsDocumentActivity extends AppCompatActivity {
 
     public static final String DOCUMENT_DETAILS_INTENT = "DOCUMENT_DETAILS_INTENT";
@@ -62,6 +77,12 @@ public class DetailsDocumentActivity extends AppCompatActivity {
     @RestService
     DocumentClient documentClient;
 
+    @RestService
+    DocumentPDFClient documentPDFClient;
+
+    @Bean
+    TokenKeeper tokenKeeper;
+
     @AfterViews
     void initTable() {
         if (getIntent().getSerializableExtra(DOCUMENT_DETAILS_INTENT) != null) {
@@ -79,6 +100,14 @@ public class DetailsDocumentActivity extends AppCompatActivity {
         actionListView.setAdapter(actionsAdapter);
         adapter.setDocument(document);
         documentContent.setAdapter(adapter);
+
+        String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE"};
+
+        int permsRequestCode = 200;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(perms, permsRequestCode);
+        }
     }
 
     @FocusChange(R.id.documentTitle)
@@ -112,6 +141,29 @@ public class DetailsDocumentActivity extends AppCompatActivity {
         intent.putExtra(VerificationActivity.VERIFICATION_STEPS_INTENT, new ArrayList<>(document.verificationSteps));
         intent.putExtra(VerificationActivity.VERIFICATION_ELEMENT_DI, document.id);
         startActivityForResult(intent, 3);
+    }
+
+    @OptionsItem(R.id.action_export_pdf)
+    void exportToPdf() {
+        getPdfDocument(document.id);
+
+    }
+
+    @Background
+    void getPdfDocument(String id) {
+
+        String data = TextUtils.join("+", documentPDFClient.generateDocumentPDF(id));
+        String extStorageDirectory = Environment.getExternalStorageDirectory()
+                .toString();
+        File folder = new File(extStorageDirectory);
+        folder.mkdir();
+        File file = new File(folder, "Read.pdf");
+        try {
+            file.createNewFile();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        DownloadFile(Base64.decode(data.getBytes(), Base64.NO_PADDING), file);
     }
 
     @Background
@@ -148,6 +200,19 @@ public class DetailsDocumentActivity extends AppCompatActivity {
                 document.verificationSteps = (List<VerificationStepDTO>) data.getSerializableExtra(VerificationActivity.VERIFICATION_STEPS_INTENT);
             }
         }
+    }
+
+    public static void DownloadFile(byte[] fileBytes, File directory) {
+        try {
+
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(directory));
+            bos.write(fileBytes);
+            bos.flush();
+            bos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

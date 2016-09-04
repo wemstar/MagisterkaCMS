@@ -26,7 +26,7 @@ public class DefaultConfiguration {
         return new EmbeddedMongoBuilder()
                 .version("2.4.5")
                 .bindIp("127.0.0.1")
-                .port(12345)
+                .port(12346)
                 .build();
     }
 

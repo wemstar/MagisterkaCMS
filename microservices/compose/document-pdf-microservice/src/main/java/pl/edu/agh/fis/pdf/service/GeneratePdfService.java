@@ -6,6 +6,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.edu.agh.fis.clients.application.ApplicationClient;
 import pl.edu.agh.fis.clients.document.DocumentClient;
 import pl.edu.agh.fis.dto.document.DocumentDTO;
 import pl.edu.agh.fis.pdf.helper.DocumentHelper;
@@ -22,8 +23,11 @@ public class GeneratePdfService {
     @Autowired
     DocumentClient documentClient;
 
+    @Autowired
+    ApplicationClient applicationClient;
 
-    public byte[] generatePdf(String documentId) throws DocumentException {
+
+    public byte[] generateDocumentPdf(String documentId) throws DocumentException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         DocumentDTO documentSource = documentClient.getDocument(documentId).getContent();
         Document document = new Document(PageSize.LETTER, 0.75F, 0.75F, 0.75F, 0.75F);
@@ -38,4 +42,7 @@ public class GeneratePdfService {
     }
 
 
+    public byte[] generateApplicationPdf(String documentId) {
+        return new byte[0];
+    }
 }

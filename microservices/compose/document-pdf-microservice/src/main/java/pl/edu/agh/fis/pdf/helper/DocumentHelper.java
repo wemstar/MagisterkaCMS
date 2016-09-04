@@ -3,7 +3,9 @@ package pl.edu.agh.fis.pdf.helper;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
+import pl.edu.agh.fis.dto.document.ChapterDTO;
 import pl.edu.agh.fis.dto.document.DocumentDTO;
+import pl.edu.agh.fis.dto.document.ParagraphDTO;
 
 import java.util.Date;
 
@@ -51,7 +53,16 @@ public class DocumentHelper {
     }
 
     public static void addContent(Document document, DocumentDTO source) throws DocumentException {
-        Anchor anchor = new Anchor("First Chapter", catFont);
+
+        int i = 0;
+        for(ChapterDTO chapterDTO: source.chapters) {
+            i++;
+            addChapter(document,chapterDTO,i);
+        }
+
+
+
+        /*Anchor anchor = new Anchor("First Chapter", catFont);
         anchor.setName("First Chapter");
 
         // Second parameter is the number of the chapter
@@ -91,8 +102,20 @@ public class DocumentHelper {
         subCatPart.add(new Paragraph("This is a very important message"));
 
         // now add all this to the document
-        document.add(catPart);
+        document.add(catPart);*/
 
+    }
+
+    private static void addChapter(Document document, ChapterDTO chapterDTO, int number) throws DocumentException {
+        Anchor anchor = new Anchor(chapterDTO.name, catFont);
+        anchor.setName(chapterDTO.name);
+
+        // Second parameter is the number of the chapter
+        Chapter catPart = new Chapter(new Paragraph(anchor), number);
+        for(ParagraphDTO paragraphDTO: chapterDTO.paragraphs) {
+            catPart.add(new Paragraph(String.join(", ", paragraphDTO.content)));
+        }
+        document.add(catPart);
     }
 
     public static void createTable(Section subCatPart)
