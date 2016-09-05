@@ -55,3 +55,13 @@ document-microservice:
     - edge-server
   external_links:
     - image-config-server:config-server
+document-pdf-microservice:
+  image: wemstar/magisterka-cms-image-document-pdf-microservice
+  expose:
+      - "8080"
+  links:
+#    - logstash
+    - discovery-server
+    - edge-server
+  external_links:
+    - image-config-server:config-server

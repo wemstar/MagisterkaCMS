@@ -1,7 +1,7 @@
 apply from: '../../../spring-boot.gradle'
 
 jar {
-	baseName = 'simple-micro-service'
+	baseName = 'document-pdf-microservice'
 }
 apply from: '../../../commons.gradle'
 dependencies {

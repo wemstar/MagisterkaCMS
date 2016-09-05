@@ -12,6 +12,6 @@ after_success:
     docker push wemstar/magisterka-cms-image-edge-server;
     docker push wemstar/magisterka-cms-image-discovery-server;
     docker push wemstar/magisterka-cms-image-document-microservice;
-    docker push wemstar/magisterka-cms-image-simple-micro-service;
+    docker push wemstar/magisterka-cms-image-document-pdf-microservice;
     docker push wemstar/magisterka-cms-image-config-server;
     docker push wemstar/magisterka-cms-image-user-micro-service;
