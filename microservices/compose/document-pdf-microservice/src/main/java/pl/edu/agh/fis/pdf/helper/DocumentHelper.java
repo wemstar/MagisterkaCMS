@@ -48,8 +48,6 @@ public class DocumentHelper {
         addEmptyLine(preface, 3);
 
         document.add(preface);
-        // Start a new page
-        document.newPage();
     }
 
     public static void addContent(Document document, DocumentDTO source) throws DocumentException {

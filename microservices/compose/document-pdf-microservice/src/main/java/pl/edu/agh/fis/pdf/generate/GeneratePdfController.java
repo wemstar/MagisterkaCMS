@@ -35,9 +35,9 @@ public class GeneratePdfController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/application/{documentId}")
-    public ResponseEntity<byte[]> generateApplicationPdf(@PathVariable String documentId) throws DocumentException {
+    public String[] generateApplicationPdf(@PathVariable String documentId) throws DocumentException {
         byte[] byteArray = service.generateApplicationPdf(documentId);
-        return  generateResponse(byteArray);
+        return  Base64.getEncoder().encodeToString(byteArray).split("/+");
     }
 
     private ResponseEntity<byte[]> generateResponse(byte[] data) {

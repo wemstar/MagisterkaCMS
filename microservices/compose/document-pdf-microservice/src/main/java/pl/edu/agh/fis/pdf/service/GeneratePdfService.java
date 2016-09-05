@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.agh.fis.clients.application.ApplicationClient;
 import pl.edu.agh.fis.clients.document.DocumentClient;
+import pl.edu.agh.fis.dto.application.ApplicationDTO;
 import pl.edu.agh.fis.dto.document.DocumentDTO;
+import pl.edu.agh.fis.pdf.helper.ApplicationHelper;
 import pl.edu.agh.fis.pdf.helper.DocumentHelper;
 
 import java.io.ByteArrayOutputStream;
@@ -42,7 +44,17 @@ public class GeneratePdfService {
     }
 
 
-    public byte[] generateApplicationPdf(String documentId) {
-        return new byte[0];
+    public byte[] generateApplicationPdf(String documentId) throws DocumentException {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        ApplicationDTO documentSource = applicationClient.getApplication(documentId).getContent();
+        Document document = new Document(PageSize.LETTER, 0.75F, 0.75F, 0.75F, 0.75F);
+        PdfWriter.getInstance(document, byteArrayOutputStream);  // Do this BEFORE document.open()
+
+        document.open();
+        ApplicationHelper.addMetaData(document, documentSource);
+        ApplicationHelper.addTitlePage(document, documentSource);
+        ApplicationHelper.addContent(document, documentSource);
+        document.close();
+        return byteArrayOutputStream.toByteArray();
     }
 }
