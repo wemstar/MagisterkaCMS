@@ -3,9 +3,11 @@ package pl.edu.agh.fis.view.document.chapter;
 import android.content.Context;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.FocusChange;
+import org.androidannotations.annotations.TextChange;
 import org.androidannotations.annotations.ViewById;
 
 import pl.edu.agh.fis.R;
@@ -31,8 +33,8 @@ public class ChapterItemEditView extends RelativeLayout {
         chapterTitile.setText(chapterDTO.name);
     }
 
-    @FocusChange(R.id.chapter_title)
-    void focusChangedOnHelloTextView(EditText editText) {
+    @TextChange(R.id.chapter_title)
+    void focusChangedOnHelloTextView(TextView editText) {
         chapterDTO.name = editText.getText().toString();
     }
 }

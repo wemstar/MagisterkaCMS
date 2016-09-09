@@ -1,12 +1,15 @@
 package pl.edu.agh.fis.rest.document;
 
+import org.androidannotations.rest.spring.annotations.Accept;
 import org.androidannotations.rest.spring.annotations.Get;
 import org.androidannotations.rest.spring.annotations.Path;
 import org.androidannotations.rest.spring.annotations.RequiresHeader;
 import org.androidannotations.rest.spring.annotations.Rest;
+import org.androidannotations.rest.spring.api.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 import pl.edu.agh.fis.Constraints;
+import pl.edu.agh.fis.dto.ByteResponse;
 import pl.edu.agh.fis.rest.interceptor.TokenInterceptor;
 
 /**
@@ -17,9 +20,9 @@ public interface DocumentPDFClient {
 
     @Get(value = "/document-pdf-microservice/pdf/generation/document/{id}")
     @RequiresHeader("x-auth-token")
-    String[] generateDocumentPDF(@Path String id);
+    ByteResponse[] generateDocumentPDF(@Path String id);
 
     @Get(value = "/document-pdf-microservice/pdf/generation/application/{id}")
     @RequiresHeader("x-auth-token")
-    String generateApplicationPDF(@Path String id);
+    ByteResponse generateApplicationPDF(@Path String id);
 }

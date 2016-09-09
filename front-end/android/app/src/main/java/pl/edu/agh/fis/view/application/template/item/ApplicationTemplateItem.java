@@ -5,11 +5,13 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.FocusChange;
 import org.androidannotations.annotations.ItemSelect;
+import org.androidannotations.annotations.TextChange;
 import org.androidannotations.annotations.ViewById;
 
 import pl.edu.agh.fis.R;
@@ -48,8 +50,8 @@ public class ApplicationTemplateItem extends LinearLayout {
         field.type = FieldTypeDTO.getFromString(adapter.getItem(position).toString());
     }
 
-    @FocusChange(R.id.fieldName)
-    void focusChangedFieldNameEditText(EditText editText) {
+    @TextChange(R.id.fieldName)
+    void focusChangedFieldNameEditText(TextView editText) {
         field.filedName = editText.getText().toString();
     }
 

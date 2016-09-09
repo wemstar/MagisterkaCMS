@@ -1,7 +1,10 @@
 package pl.edu.agh.fis.activity.application;
 
 import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Base64;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,6 +18,10 @@ import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,12 +36,13 @@ import pl.edu.agh.fis.dto.activity.ActivityDTO;
 import pl.edu.agh.fis.dto.application.ApplicationDTO;
 import pl.edu.agh.fis.dto.verification.VerificationStepDTO;
 import pl.edu.agh.fis.rest.application.ApplicationClient;
+import pl.edu.agh.fis.rest.document.DocumentPDFClient;
 
 /**
  * Created by wemstar on 2016-06-22.
  */
 @EActivity(R.layout.activity_details_application)
-@OptionsMenu(R.menu.save_verification_menu)
+@OptionsMenu(R.menu.save_add_expot_menu)
 public class ApplicationDetailsActivity extends AppCompatActivity {
     public static final String APPLICATION_DETAILS = "APPLICATION_DETAILS";
 
@@ -55,6 +63,9 @@ public class ApplicationDetailsActivity extends AppCompatActivity {
 
     @RestService
     ApplicationClient applicationClient;
+
+    @RestService
+    DocumentPDFClient documentPDFClient;
 
     private ApplicationDTO applicationDTO;
 
@@ -116,6 +127,44 @@ public class ApplicationDetailsActivity extends AppCompatActivity {
                 applicationDTO.verificationSteps = (List<VerificationStepDTO>) data.getSerializableExtra(VerificationActivity.VERIFICATION_STEPS_INTENT);
             }
         }
+    }
+
+
+    @OptionsItem(R.id.action_export_pdf)
+    void exportToPdf() {
+        getPdfDocument(applicationDTO.id);
+
+    }
+
+    @Background
+    void getPdfDocument(String id) {
+
+       // String data = TextUtils.join("+", documentPDFClient.generateApplicationPDF(id));
+        byte[] data = documentPDFClient.generateApplicationPDF(id).data;
+        String extStorageDirectory = Environment.getExternalStorageDirectory()
+                .toString();
+        File folder = new File(extStorageDirectory);
+        folder.mkdir();
+        File file = new File(folder, applicationDTO.title + ".pdf");
+        try {
+            file.createNewFile();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        DownloadFile(data/*Base64.decode(data, Base64.NO_PADDING)*/, file);
+    }
+
+    public static void DownloadFile(byte[] fileBytes, File directory) {
+        try {
+
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(directory));
+            bos.write(fileBytes);
+            bos.flush();
+            bos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

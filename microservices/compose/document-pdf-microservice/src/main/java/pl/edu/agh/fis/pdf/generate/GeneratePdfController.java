@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import pl.edu.agh.fis.dto.ByteResponse;
 import pl.edu.agh.fis.pdf.service.GeneratePdfService;
 
 import java.io.ByteArrayOutputStream;
@@ -29,15 +30,31 @@ public class GeneratePdfController {
     GeneratePdfService service;
 
     @RequestMapping(method = RequestMethod.GET, value = "/document/{documentId}")
-    public String[] generateDocumentPdf(@PathVariable String documentId) throws DocumentException {
+    public ByteResponse generateDocument(@PathVariable String documentId) throws DocumentException {
         byte[] byteArray = service.generateDocumentPdf(documentId);
-        return Base64.getEncoder().encodeToString(byteArray).split("/+");
+        ByteResponse byteResponse = new ByteResponse();
+        byteResponse.data = byteArray;
+        return  byteResponse;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/application/{documentId}")
-    public String[] generateApplicationPdf(@PathVariable String documentId) throws DocumentException {
+    public ByteResponse generateApplication(@PathVariable String documentId) throws DocumentException {
         byte[] byteArray = service.generateApplicationPdf(documentId);
-        return  Base64.getEncoder().encodeToString(byteArray).split("/+");
+        ByteResponse byteResponse = new ByteResponse();
+        byteResponse.data = byteArray;
+        return  byteResponse;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/document/pdf/{documentId}")
+    public ResponseEntity<byte[]> generateDocumentPdf(@PathVariable String documentId) throws DocumentException {
+        byte[] byteArray = service.generateDocumentPdf(documentId);
+        return generateResponse(byteArray);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/application/pdf/{documentId}")
+    public ResponseEntity<byte[]> generateApplicationPdf(@PathVariable String documentId) throws DocumentException {
+        byte[] byteArray = service.generateApplicationPdf(documentId);
+        return  generateResponse(byteArray);
     }
 
     private ResponseEntity<byte[]> generateResponse(byte[] data) {

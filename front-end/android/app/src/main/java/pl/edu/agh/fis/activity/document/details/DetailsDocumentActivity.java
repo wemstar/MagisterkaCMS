@@ -157,7 +157,7 @@ public class DetailsDocumentActivity extends AppCompatActivity {
                 .toString();
         File folder = new File(extStorageDirectory);
         folder.mkdir();
-        File file = new File(folder, "Read.pdf");
+        File file = new File(folder, document.title + ".pdf");
         try {
             file.createNewFile();
         } catch (IOException e1) {

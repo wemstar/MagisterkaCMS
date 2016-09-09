@@ -3,9 +3,11 @@ package pl.edu.agh.fis.view.document.paragraph;
 import android.content.Context;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.FocusChange;
+import org.androidannotations.annotations.TextChange;
 import org.androidannotations.annotations.ViewById;
 
 import pl.edu.agh.fis.R;
@@ -36,8 +38,8 @@ public class ParagraphDetailsItemEditView extends LinearLayout {
     @ViewById(R.id.chapter_title)
     EditText chapterTitile;
 
-    @FocusChange(R.id.chapter_title)
-    void focusChangedOnHelloTextView(EditText editText) {
+    @TextChange(R.id.chapter_title)
+    void focusChangedOnHelloTextView(TextView editText) {
         paragraph.content.set(position, editText.getText().toString());
     }
 }
